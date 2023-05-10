@@ -1,0 +1,1 @@
+const UNEXPECTEDERROR ="Sorry, an unexpected error, please try again";
