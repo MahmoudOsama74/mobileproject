@@ -28,24 +28,14 @@ class LoginForm extends StatelessWidget {
         listener: (context, state) {
           if (state is LoginSuccessState)
           {
-            if (state.loginModel.status)
+            CacheHelper.saveData(
+              key: 'token',
+              value: state.loginModel.accessToken,
+            ).then((value)
             {
-              print(state.loginModel.message);
-              print(state.loginModel.data?.token);
-
-              CacheHelper.saveData(
-                key: 'token',
-                value: state.loginModel.data?.token,
-              ).then((value)
-              {
-                token = state.loginModel.data?.token;
-                showToast(state.loginModel.message,Colors.green,Colors.white);
-              });
-            } else {
-              print(state.loginModel.message);
-
-              showToast(state.loginModel.message,Colors.red,Colors.white);
-            }
+              token = state.loginModel.accessToken;
+              showToast("Successfully Login ",Colors.green,Colors.white);
+            });
           }
           if(state is LoginErrorState){
             showToast(UNEXPECTEDERROR,Colors.red,Colors.white);

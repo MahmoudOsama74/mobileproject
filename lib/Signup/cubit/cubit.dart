@@ -1,11 +1,9 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobileproject/Signup/cubit/states.dart';
-import '../../../network/end_points.dart';
-import '../../../network/remote/ParseJwtToken.dart';
-import '../../../network/remote/dio_helper.dart';
 import 'package:http/http.dart' as http;
-
-import '../../Login/components/constants.dart';
 import '../Model/MedicalInformation.dart';
 import '../Model/SignUp.dart';
 class SignUpCubit extends Cubit<SignUpStates> {
@@ -17,78 +15,42 @@ class SignUpCubit extends Cubit<SignUpStates> {
   MedicalInformationModel? medicalInformationModel;
 
   void userSignUp({
-    required String username,
-    required String phoneNumber,
     required String name,
-    required int age,
-    required String CIndustry,
-    required String role,
+    required String contact_person_name,
+    required String contact_person_phone_number,
     required String email,
+    required String company_address,
+    required String company_size,
     required String password,
-  })
-  {
+    required String password_confirmation,
+  }) async {
     emit(SignUpLoadingState());
-    DioHelper.postData(
-      url: SIGNUP,
-      data:
-      {
-        'username':username,
-        'password':password,
-        'email':email,
-        'phoneNumber':phoneNumber,
-        'name':name,
-        'age':age,
-        'gender':CIndustry,
-        'role':role
-      },
-      token: token,
-    ).then((value)
-    {
-      print(value.statusCode);
-      signUpModel = SignUpModel.fromJson(value.data);
+    final queryParameters = {
+      "name": name,
+      "contact_person_name": contact_person_name,
+      "contact_person_phone_number": contact_person_phone_number,
+      "email": email,
+      "company_address": company_address,
+      "company_size": company_size,
+      "password":password,
+      "password_confirmation":password_confirmation,
+    };
+    final uri =
+    Uri.https('mobileenterpriseapplication-production.up.railway.app', '/api/Auth/register', queryParameters);
+    final response = await http.post(uri, headers: {
+      HttpHeaders.contentTypeHeader: 'application/json',
+    });
+    print(response.statusCode);
+    print(response.body);
+    if(response.statusCode==201){
+      print("response");
+      signUpModel = SignUpModel.fromJson(json.decode(response.body));
       emit(SignUpSuccessState(signUpModel!));
-    }).catchError((error)
-    {
-      print("SSSSS");
-      print(error);
-      emit(SignUpErrorState(error.toString()));
-    });
+    }
+    else{
+      emit(SignUpErrorState(response.body.toString()));
+    }
+
   }
-
-
-
-
-  void userCreateMedicalInformation({
-    required String userId,
-    required String bloodType,
-    required int currentWeight,
-    required int currentHeight,
-  })
-  {
-    emit(MedicalInformationInitialState());
-    DioHelper.postData(
-      url: MedicalInformation,
-      data:
-      {
-        'userId':userId,
-        'bloodType':bloodType,
-        'CurrentWeight':currentWeight,
-        'CurrentHeight':currentHeight,
-      },
-      token: token,
-    ).then((value)
-    {
-      print(value.statusCode);
-      medicalInformationModel = MedicalInformationModel.fromJson(value.data);
-      emit(MedicalInformationSuccessState(medicalInformationModel!));
-    }).catchError((error)
-    {
-      print("SSSSS");
-      print(error);
-      emit(MedicalInformationErrorState(error.toString()));
-    });
-  }
-
-
 
 }

@@ -1,13 +1,3 @@
 const LOGIN = 'authenticate';
 const TEMP = 'temp';
 const SIGNUP='userService/auth/register';
-const MedicalInformation='MedicalInformation/createMedicalInformation';
-const MedicalInformationId='MedicalInformation/GetMedicalInformationByUserId';
-const CreateBloodPressure='BloodPressure/AddBloodPressure';
-const GetMyBloodPressure='BloodPressure/GetBloodPressureByMedicalInformationId';
-const UpdateBloodPressure='BloodPressure/UpdateBloodPressure';
-const DeleteBloodPressure='BloodPressure/DeleteBloodPressure';
-const DeleteSpecificSugarTest='SugarBloodTest/deleteRead';
-const UpdateSpecificSugarTest='SugarBloodTest/updateRead';
-const GetMySugarTest='SugarBloodTest/getSugarBloodTestByMedicalInformationId';
-const AddSugarTest='SugarBloodTest/addRead';

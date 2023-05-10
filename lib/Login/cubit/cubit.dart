@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 
 import 'package:flutter/cupertino.dart';
@@ -19,26 +20,28 @@ class LoginCubit extends Cubit<LoginStates> {
   void userLogin({
     required String email,
     required String password,
-  })
+  })async
   {
     emit(LoginLoadingState());
-    DioHelper.postData(
-      url: LOGIN,
-      data:
-      {
-        'username': email,
-        'password': password,
-      },
-    ).then((value)
-    {
-
-      loginModel = LoginModel.fromJson(value.data);
-      emit(LoginSuccessState(loginModel!));
-    }).catchError((error)
-    {
-      print(error);
-      emit(LoginErrorState(error.toString()));
+    final queryParameters ={
+      'email': email,
+      'password': password,
+    };
+    final uri =
+    Uri.https('mobileenterpriseapplication-production.up.railway.app', '/api/Auth/login', queryParameters);
+    final response = await http.post(uri, headers: {
+      HttpHeaders.contentTypeHeader: 'application/json',
     });
+    print(response.statusCode);
+    print(response.body);
+    if(response.statusCode==200){
+      print("response");
+      loginModel = LoginModel.fromJson(json.decode(response.body));
+      emit(LoginSuccessState(loginModel!));
+    }
+    else{
+      emit(LoginErrorState(response.body.toString()));
+    }
   }
   Future<void> Temp()
   async {

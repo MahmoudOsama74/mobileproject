@@ -2,18 +2,16 @@ import 'dart:convert';
 
 class SignUpModel
 {
-  late bool status;
   late String message;
-  late SignUpData? data;
+  late SignUpData? user;
 
-  SignUpModel({required this.status,required this.message,required this.data});
+  SignUpModel({required this.message,required this.user});
   factory SignUpModel.fromJson(Map<String, dynamic> jsonn)
   {
     print("fffff");
     SignUpModel L= SignUpModel(
-        status: jsonn['status'] as bool,
         message: jsonn['message'] as String,
-        data:jsonn['data'] != null ? SignUpData.fromJson(jsonn['data']) : null
+        user:jsonn['user'] != null ? SignUpData.fromJson(jsonn['user']) : null
     );
 
     return L;
@@ -22,17 +20,26 @@ class SignUpModel
 
 class SignUpData
 {
-  late String userId;
-  late String token;
-  late String role;
-  SignUpData({required this.userId,required this.token,required this.role});
+  late int id;
+  late String name;
+  late String contact_person_name;
+  late String contact_person_phone_number;
+  late String email;
+  late String company_address;
+  late String company_size;
+  SignUpData({required this.id,required this.name,required this.contact_person_name,required this.contact_person_phone_number,
+    required this.email,required this.company_address,required this.company_size,});
   // named constructor
   factory SignUpData.fromJson(Map<String, dynamic> jsonn)
   {
     return SignUpData(
-      userId : jsonn['userId'] as String,
-      token :jsonn['token'] as String,
-      role :jsonn['role']as String,
+      name : jsonn['name'] as String,
+      contact_person_name :jsonn['contact_person_name'] as String,
+      contact_person_phone_number :jsonn['contact_person_phone_number']as String,
+      email : jsonn['email'] as String,
+      company_address : jsonn['company_address'] as String,
+      company_size : jsonn['company_size'] as String,
+      id:jsonn['id'] as int
     );
   }
 }

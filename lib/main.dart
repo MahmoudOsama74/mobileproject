@@ -56,7 +56,7 @@ class MyApp extends StatelessWidget {
                   borderSide: BorderSide.none,
                 ),
               )),
-          home: BusinessServicesList(),
+          home: LoginForm(),
         );
       },
     );
