@@ -21,23 +21,9 @@ class SignUpErrorState extends SignUpStates
   SignUpErrorState(this.error);
 }
 
-class MedicalInformationInitialState extends SignUpStates {}
 
-class MedicalInformationLoadingState extends SignUpStates {}
 
-class MedicalInformationSuccessState extends SignUpStates
-{
-  late MedicalInformationModel medicalInformationModel;
 
-  MedicalInformationSuccessState(this.medicalInformationModel);
-}
-
-class MedicalInformationErrorState extends SignUpStates
-{
-  final String error;
-
-  MedicalInformationErrorState(this.error);
-}
 
 
 

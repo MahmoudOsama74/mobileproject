@@ -7,6 +7,8 @@ import 'Profile/CompanyProfile.dart';
 import 'Profile/UpdateProfile.dart';
 
 import 'ServicesPage/Business Services/bServicesList.dart';
+import 'Signup/components/Location.dart';
+import 'Signup/components/LocationCompelete.dart';
 import 'Signup/components/signup_form.dart';
 import 'constants.dart';
 import 'network/local/cache_helper.dart';
@@ -56,7 +58,7 @@ class MyApp extends StatelessWidget {
                   borderSide: BorderSide.none,
                 ),
               )),
-          home: LoginForm(),
+          home: SignUpForm(),
         );
       },
     );
