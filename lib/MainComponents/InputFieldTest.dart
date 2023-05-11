@@ -4,33 +4,36 @@ import 'package:intl/intl.dart';
 import '../../../constants.dart';
 
 
-Widget inputFieldTest(TextEditingController fieldController,String fieldName){
+Widget inputFieldTest(TextEditingController fieldController,String fieldName,TextInputType type,validationFunction){
   return Padding(
     padding:
     const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
     child: TextFormField(
-        controller: fieldController,
-        cursorColor: kPrimaryColor,
-        decoration:  InputDecoration(
-          labelText: "$fieldName  \n",
-          labelStyle: const TextStyle(fontSize: 20, color: Colors.black),
-        ),
-        ),
+      controller: fieldController,
+      cursorColor: kPrimaryColor,
+      keyboardType: type,
+      decoration:  InputDecoration(
+        labelText: "$fieldName  \n",
+        labelStyle: const TextStyle(fontSize: 20, color: Colors.black),
+      ),
+      validator: validationFunction,
+    ),
   );
 }
-Widget inputFieldTest2(TextEditingController fieldController,String fieldName){
+Widget inputFieldTest2(TextEditingController fieldController,String fieldName,TextInputType type,validationFunction){
   return Padding(
     padding:
     const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
     child: TextFormField(
       readOnly: true,
       controller: fieldController,
-      keyboardType: TextInputType.number,
+      keyboardType: type,
       cursorColor: kPrimaryColor,
       decoration:  InputDecoration(
         labelText: "$fieldName  \n",
         labelStyle: const TextStyle(fontSize: 20, color: Colors.black),
       ),
+      validator: validationFunction,
     ),
   );
 }
@@ -70,7 +73,7 @@ Widget dropDownInputFieldTest(String fieldName, String dropdownValue,List<String
     child: DropdownButtonFormField(
       decoration:  InputDecoration(
         labelText: "$fieldName  \n",
-        labelStyle: const TextStyle(fontSize: 25, color: Colors.black),
+        labelStyle: const TextStyle(fontSize: 20, color: Colors.black),
         enabledBorder: const OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(10)),
           borderSide: BorderSide.none,

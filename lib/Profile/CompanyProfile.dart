@@ -98,21 +98,20 @@ class ProfileScreen extends StatelessWidget {
                   SizedBox(height: screenHeight * 0.02),
                   Column(
                     children: [
-                      inputFieldTest2(CnameController, "Company Name",),
+                      inputFieldTest2(CnameController, "Company Name",TextInputType.name,null),
                       SizedBox(height: screenHeight * 0.015),
-                      inputFieldTest2(PnameController, "Person Name"),
+                      inputFieldTest2(PnameController, "Person Name",TextInputType.name,null),
                       SizedBox(height: screenHeight * 0.015),
-                      inputFieldTest2(phoneController, "Phone",),
+                      inputFieldTest2(phoneController, "Phone",TextInputType.phone,null),
                       SizedBox(height: screenHeight * 0.015),
-                      inputFieldTest2(EmailController, "Email Address"),
+                      inputFieldTest2(EmailController, "Email Address",TextInputType.emailAddress,null),
                       SizedBox(height: screenHeight * 0.015),
-                      inputFieldTest2(companyAddressController, "Company Address"),
+                      inputFieldTest2(companyAddressController, "Company Address",TextInputType.streetAddress,null),
                       SizedBox(height: screenHeight * 0.02),
-                      inputFieldTest2(companySizeController, "Company Size"),
+                      inputFieldTest2(companySizeController, "Company Size",TextInputType.name,null),
                       SizedBox(height: screenHeight * 0.02),
-                      inputFieldTest2(companyIndustryController, "Company Industry"),
+                      inputFieldTest2(companyIndustryController, "Company Industry",TextInputType.none,null),
                       SizedBox(height: screenHeight * 0.02),
-
 
                     ],
 
@@ -130,13 +129,3 @@ class ProfileScreen extends StatelessWidget {
 }
 
 
-class CheckboxProvider with ChangeNotifier {
-  bool _isChecked = false;
-
-  bool get isChecked => _isChecked;
-
-  set isChecked(bool value) {
-    _isChecked = value;
-    notifyListeners();
-  }
-}

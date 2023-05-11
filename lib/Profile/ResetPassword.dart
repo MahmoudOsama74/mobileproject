@@ -73,9 +73,10 @@ class ResetPasswordState extends State<ResetPassword> {
                               ),
                             ),
                           ),
-                          inputFieldTest(_oldPassword,"Old Password",),
-                          inputFieldTest(_newPassword,"New Password",),
-                          inputFieldTest(_confirmPassword,"confirm Password",),
+                          inputFieldTest(_oldPassword,"Old Password",TextInputType.text,null),
+                          inputFieldTest(_newPassword,"New Password",TextInputType.text,null),
+                          inputFieldTest(_confirmPassword,"confirm Password",TextInputType.text,null),
+
 
                           const SizedBox(height: 10 / 2),
                           Center(
@@ -89,6 +90,11 @@ class ResetPasswordState extends State<ResetPassword> {
                               ),
                               child: const Text('Reset Password'),
                               onPressed: () {
+                                print('-------------------------------------------');
+                                print(_oldPassword.text);
+                                print(_newPassword.text);
+                                print(_confirmPassword.text);
+                                print('-------------------------------------------');
                                 UpdatePasswordCubit.get(context).userUpdatePassword(
                                     old_password: _oldPassword.text,
                                     new_password: _newPassword.text,

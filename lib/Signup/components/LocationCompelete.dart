@@ -8,6 +8,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:lottie/lottie.dart';
 
+import '../../Login/components/LoginPage.dart';
 import '../Model/UserRegister.dart';
 import '../cubit/cubit.dart';
 import '../cubit/states.dart';
@@ -102,6 +103,7 @@ class _LocationForUser extends State<LocationForUser> {
                       onPressed: () {
                         _gotoUserCurrentPosition();
                         print(widget.userRegister.name);
+
                         SignUpCubit.get(context).userSignUp(
                             name: widget.userRegister.name,
                             contact_person_name: widget.userRegister.contact_person_name,
@@ -111,6 +113,10 @@ class _LocationForUser extends State<LocationForUser> {
                             company_size: widget.userRegister.company_size,
                             password: widget.userRegister.password,
                             password_confirmation: widget.userRegister.password_confirmation
+                        );
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => LoginForm()),
                         );
                       },
                       child: const Icon(Icons.task_alt_rounded),
