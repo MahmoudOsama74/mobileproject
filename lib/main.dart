@@ -29,38 +29,31 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return ScreenUtilInit(
-      designSize: const Size(360, 700),
-      minTextAdapt: true,
-      splitScreenMode: true,
-      builder: (context , child) {
-        return MaterialApp(
-          debugShowCheckedModeBanner: false,
-          title: 'Project',
-          theme: ThemeData(
-              primaryColor: Color(0xFF7F8A88),
-              scaffoldBackgroundColor: Colors.white,
-              elevatedButtonTheme: ElevatedButtonThemeData(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor:const Color(0xFF04342A),
-                  shape: const StadiumBorder(),
-                ),
-              ),
-              inputDecorationTheme: const InputDecorationTheme(
-                filled: true,
-                fillColor: Color(0xFFBECCCA),
-                iconColor: Color(0xFF000000),
-                prefixIconColor: Color(0xFF000000),
-                contentPadding: EdgeInsets.symmetric(
-                    horizontal: defaultPadding, vertical: defaultPadding),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(10)),
-                  borderSide: BorderSide.none,
-                ),
-              )),
-          home: LoginForm(),
-        );
-      },
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Project',
+      theme: ThemeData(
+          primaryColor: Color(0xFF7F8A88),
+          scaffoldBackgroundColor: Colors.white,
+          elevatedButtonTheme: ElevatedButtonThemeData(
+            style: ElevatedButton.styleFrom(
+              backgroundColor:const Color(0xFF04342A),
+              shape: const StadiumBorder(),
+            ),
+          ),
+          inputDecorationTheme: const InputDecorationTheme(
+            filled: true,
+            fillColor: Color(0xFFBECCCA),
+            iconColor: Color(0xFF000000),
+            prefixIconColor: Color(0xFF000000),
+            contentPadding: EdgeInsets.symmetric(
+                horizontal: defaultPadding, vertical: defaultPadding),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.all(Radius.circular(10)),
+              borderSide: BorderSide.none,
+            ),
+          )),
+      home: LoginForm(),
     );
   }
 }
