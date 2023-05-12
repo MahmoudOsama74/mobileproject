@@ -100,6 +100,9 @@ class ResetPasswordState extends State<ResetPassword> {
                                     new_password: _newPassword.text,
                                     new_password_confirmation: _confirmPassword.text
                                 );
+                                if(state is UpdatePasswordSuccessState){
+                                  Navigator.pop(context);
+                                }
                               },
                             ),
                           ),

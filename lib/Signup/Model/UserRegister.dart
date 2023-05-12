@@ -8,6 +8,7 @@ class UserRegister{
   late String password;
   late String password_confirmation;
 
+
   UserRegister(
       this.name,
       this.contact_person_name,
@@ -16,5 +17,6 @@ class UserRegister{
       this.company_address,
       this.company_size,
       this.password,
-      this.password_confirmation);
+      this.password_confirmation
+      );
 }

@@ -1,10 +1,10 @@
-class SignUpModel {
+class UserInformationModel {
   String? message;
   User? user;
 
-  SignUpModel({this.message, this.user});
+  UserInformationModel({this.message, this.user});
 
-  SignUpModel.fromJson(Map<String, dynamic> json) {
+  UserInformationModel.fromJson(Map<String, dynamic> json) {
     message = json['message'];
     user = json['user'] != null ? new User.fromJson(json['user']) : null;
   }
@@ -20,58 +20,70 @@ class SignUpModel {
 }
 
 class User {
+  int? id;
   String? name;
-  String? contactPersonName;
-  String? contactPersonPhoneNumber;
   String? email;
-  String? lang;
-  String? lat;
+  Null? emailVerifiedAt;
+  String? createdAt;
+  String? updatedAt;
+  String? contactPersonName;
+  Null? companyIndustry;
+  String? contactPersonPhoneNumber;
   String? companyAddress;
   String? companySize;
-  String? updatedAt;
-  String? createdAt;
-  int? id;
+  int? lang;
+  int? lat;
+  String? photo;
 
   User(
-      {this.name,
-        this.contactPersonName,
-        this.contactPersonPhoneNumber,
+      {this.id,
+        this.name,
         this.email,
-        this.lang,
-        this.lat,
+        this.emailVerifiedAt,
+        this.createdAt,
+        this.updatedAt,
+        this.contactPersonName,
+        this.companyIndustry,
+        this.contactPersonPhoneNumber,
         this.companyAddress,
         this.companySize,
-        this.updatedAt,
-        this.createdAt,
-        this.id});
+        this.lang,
+        this.lat,
+        this.photo});
 
   User.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
     name = json['name'];
-    contactPersonName = json['contact_person_name'];
-    contactPersonPhoneNumber = json['contact_person_phone_number'];
     email = json['email'];
-    lang = json['lang'];
-    lat = json['lat'];
+    emailVerifiedAt = json['email_verified_at'];
+    createdAt = json['created_at'];
+    updatedAt = json['updated_at'];
+    contactPersonName = json['contact_person_name'];
+    companyIndustry = json['company_industry'];
+    contactPersonPhoneNumber = json['contact_person_phone_number'];
     companyAddress = json['company_address'];
     companySize = json['company_size'];
-    updatedAt = json['updated_at'];
-    createdAt = json['created_at'];
-    id = json['id'];
+    lang = json['lang'];
+    lat = json['lat'];
+    photo = json['photo'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
     data['name'] = this.name;
-    data['contact_person_name'] = this.contactPersonName;
-    data['contact_person_phone_number'] = this.contactPersonPhoneNumber;
     data['email'] = this.email;
-    data['lang'] = this.lang;
-    data['lat'] = this.lat;
+    data['email_verified_at'] = this.emailVerifiedAt;
+    data['created_at'] = this.createdAt;
+    data['updated_at'] = this.updatedAt;
+    data['contact_person_name'] = this.contactPersonName;
+    data['company_industry'] = this.companyIndustry;
+    data['contact_person_phone_number'] = this.contactPersonPhoneNumber;
     data['company_address'] = this.companyAddress;
     data['company_size'] = this.companySize;
-    data['updated_at'] = this.updatedAt;
-    data['created_at'] = this.createdAt;
-    data['id'] = this.id;
+    data['lang'] = this.lang;
+    data['lat'] = this.lat;
+    data['photo'] = this.photo;
     return data;
   }
 }

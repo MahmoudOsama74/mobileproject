@@ -39,8 +39,8 @@ class LoginCubit extends Cubit<LoginStates> {
       loginModel = LoginModel.fromJson(json.decode(response.body));
       emit(LoginSuccessState(loginModel!));
     }
-    else{
-      emit(LoginErrorState(response.body.toString()));
+    else if(response.statusCode==401){
+      emit(LoginErrorState("email or Password is wrong"));
     }
   }
   Future<void> Temp()

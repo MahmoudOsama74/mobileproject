@@ -9,6 +9,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:lottie/lottie.dart';
 
 import '../../Login/components/LoginPage.dart';
+import '../../shared/components/toast.dart';
 import '../Model/UserRegister.dart';
 import '../cubit/cubit.dart';
 import '../cubit/states.dart';
@@ -54,7 +55,14 @@ class _LocationForUser extends State<LocationForUser> {
         ),
       ],
       child: BlocConsumer<SignUpCubit, SignUpStates>(
-        listener: (context, state) {},
+        listener: (context, state) {
+          if (state is SignUpSuccessState){
+            showToast(state.signUpModel.message,Colors.green,Colors.white);
+          }
+          if (state is SignUpErrorState){
+            showToast(state.error,Colors.red,Colors.white);
+          }
+        },
         builder: (context, state) {
           return Scaffold(
             body: _buildBody(context),
@@ -112,12 +120,18 @@ class _LocationForUser extends State<LocationForUser> {
                             company_address: widget.userRegister.company_address,
                             company_size: widget.userRegister.company_size,
                             password: widget.userRegister.password,
-                            password_confirmation: widget.userRegister.password_confirmation
+                            password_confirmation: widget.userRegister.password_confirmation,
+                            lat: _draggedLatlng.latitude,
+                            lang: _draggedLatlng.longitude
+
                         );
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => LoginForm()),
-                        );
+                        if(SignUpCubit.get(context).state is SignUpSuccessState){
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => LoginForm()),
+                          );
+                        }
+
                       },
                       child: const Icon(Icons.task_alt_rounded),
                     ),

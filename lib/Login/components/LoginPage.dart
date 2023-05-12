@@ -131,10 +131,13 @@ class LoginForm extends StatelessWidget {
                                     email: username.text,
                                     password: passwordController.text,
                                   );
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(builder: (context) => UpdateScreen()),
-                                  );
+                                  if(state is LoginSuccessState) {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => UpdateScreen()),
+                                    );
+                                  }
                                 }
                               },
                               child: Text(

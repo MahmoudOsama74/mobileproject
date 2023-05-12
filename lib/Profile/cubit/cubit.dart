@@ -13,13 +13,15 @@ import '../../Login/components/constants.dart';
 import '../Model/ResetPassword.dart';
 import '../Model/UpdateProfileModel.dart';
 import 'package:http/http.dart' as http;
+
+import '../Model/UserInformationModel.dart';
 class UpdateProfileCubit extends Cubit<UpdateStates> {
   UpdateProfileCubit() : super(UpdateProfileInitialState());
 
   static UpdateProfileCubit get(context) => BlocProvider.of(context);
 
   UpdateProfileModel? updateProfileModel;
-
+  UserInformationModel? userInformationModel;
   void userUpdate({
     required String name,
     required String contact_person_name,
@@ -46,6 +48,26 @@ class UpdateProfileCubit extends Cubit<UpdateStates> {
     if(response.statusCode==201){
       print("response");
       updateProfileModel = UpdateProfileModel.fromJson(json.decode(response.body));
+      emit(UpdateProfileSuccessState(updateProfileModel!));
+    }
+    else{
+      emit(UpdateProfileErrorState(response.body.toString()));
+    }
+  }
+  void userData()async
+  {
+    emit(UpdateProfileLoadingState());
+    final uri =
+    Uri.https('mobileenterpriseapplication-production.up.railway.app', '/api/Auth/getCompany');
+    final response = await http.get(uri, headers: {
+      HttpHeaders.contentTypeHeader: 'application/json',
+      HttpHeaders.authorizationHeader:token != null?'Bearer $token':'Bearer',
+    });
+    print(response.statusCode);
+    print(response.body);
+    if(response.statusCode==201){
+      print("response");
+      userInformationModel = UserInformationModel.fromJson(json.decode(response.body));
       emit(UpdateProfileSuccessState(updateProfileModel!));
     }
     else{

@@ -58,6 +58,8 @@ class SignUpCubit extends Cubit<SignUpStates> {
     required String company_size,
     required String password,
     required String password_confirmation,
+    required double lat,
+    required double lang,
   }) async {
     emit(SignUpLoadingState());
     final queryParameters = {
@@ -69,6 +71,8 @@ class SignUpCubit extends Cubit<SignUpStates> {
       "company_size": company_size,
       "password":password,
       "password_confirmation":password_confirmation,
+      "lat":lat,
+      "lang":lang
     };
     final uri =
     Uri.https('mobileenterpriseapplication-production.up.railway.app', '/api/Auth/register', queryParameters);
@@ -82,8 +86,8 @@ class SignUpCubit extends Cubit<SignUpStates> {
       signUpModel = SignUpModel.fromJson(json.decode(response.body));
       emit(SignUpSuccessState(signUpModel!));
     }
-    else{
-      emit(SignUpErrorState(response.body.toString()));
+    else if(response.statusCode==400){
+      emit(SignUpErrorState("The email has already been taken."));
     }
 
   }
