@@ -28,11 +28,11 @@ class User {
   int? id;
   String? name;
   String? email;
-  Null? emailVerifiedAt;
+  String? emailVerifiedAt;
   String? createdAt;
   String? updatedAt;
   String? contactPersonName;
-  Null? companyIndustry;
+  String? companyIndustry;
   String? contactPersonPhoneNumber;
   String? companyAddress;
   String? companySize;

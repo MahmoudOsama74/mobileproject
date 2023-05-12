@@ -127,6 +127,7 @@ class _LocationForUser extends State<LocationForUser> {
                         double latt=_draggedLatlng.latitude;
                         double langg=_draggedLatlng.longitude;
                         print(_draggedLatlng.longitude);
+                        print(widget.userRegister.company_industry);
                         SignUpCubit.get(context).userSignUp(
                             name: widget.userRegister.name,
                             contact_person_name: widget.userRegister.contact_person_name,
@@ -137,7 +138,8 @@ class _LocationForUser extends State<LocationForUser> {
                             password: widget.userRegister.password,
                             password_confirmation: widget.userRegister.password_confirmation,
                             lat: latt,
-                            langg: langg
+                            langg: langg,
+                            company_industry:widget.userRegister.company_industry
 
                         );
                         if(SignUpCubit.get(context).state is SignUpSuccessState){

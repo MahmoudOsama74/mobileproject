@@ -60,6 +60,7 @@ class SignUpCubit extends Cubit<SignUpStates> {
     required String password_confirmation,
     required double lat,
     required double langg,
+    required String company_industry
   }) async {
     emit(SignUpLoadingState());
     final queryParameters = {
@@ -72,7 +73,8 @@ class SignUpCubit extends Cubit<SignUpStates> {
       "password":password,
       "password_confirmation":password_confirmation,
       "lat":lat.toString(),
-      "lang":langg.toString()
+      "lang":langg.toString(),
+      "company_industry":company_industry
     };
     print("JJJJJJJJJJJJj");
     final uri =

@@ -44,6 +44,7 @@ class _UpdateScreenState extends State<UpdateScreen> {
   List<String>? selectedItems = [];
   String?imagepath;
   String x='';
+  String ZZ='';
   void pickMedia () async {
     XFile? file = await ImagePicker (). pickImage (source: ImageSource . gallery) ;
     if (file != null) {
@@ -75,7 +76,9 @@ class _UpdateScreenState extends State<UpdateScreen> {
             companyAddressController.text=state.userInformationModel.user?.companyAddress??"";
             dropdownValue1=state.userInformationModel.user?.companySize??"Large";
             imagepath=state.userInformationModel.user?.photo??"";
-            selectedItems=state.userInformationModel.user?.companyIndustry.toString().split(',');
+            print(state.userInformationModel.user?.photo);
+            print(state.userInformationModel.user?.companyIndustry.toString().split(','));
+            ZZ=state.userInformationModel.user?.companyIndustry.toString()??" ";
           }
           if (state is UpdateProfileSuccessState){
             showToast(state.updateProfileModel.message,Colors.green,Colors.white);
@@ -295,16 +298,20 @@ class _UpdateScreenState extends State<UpdateScreen> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  const Text(
-                                    'Company Industry:',
+                                   const Text(
+                                    'Company Industry:-',
                                     style: TextStyle(fontSize: 16),
+                                  ),
+                                  Text(
+                                    '$ZZ',
+                                    style: const TextStyle(fontSize: 16,color: Colors.red),
                                   ),
                                   SizedBox(height: 8),
                                   Padding(
                                     padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                                     child: MultiSelectDialogField(
-                                      buttonText: Text('Select Options'),
-                                      title: Text('Options'),
+                                      buttonText: const Text('Select Options'),
+                                      title: const Text('Options'),
                                       items: items.map((item) => MultiSelectItem(item, item)).toList(),
                                       listType: MultiSelectListType.CHIP,
                                       onConfirm: (selectedValues) {
@@ -316,7 +323,7 @@ class _UpdateScreenState extends State<UpdateScreen> {
                                     ),
 
                                   ),
-                                  SizedBox(height: 16),
+                                  const SizedBox(height: 16),
                                   ElevatedButton(
                                     onPressed: () {
                                       print('Selected items: $selectedItems');
@@ -347,7 +354,8 @@ class _UpdateScreenState extends State<UpdateScreen> {
                                       contact_person_name: PnameController.text,
                                       contact_person_phone_number: phoneController.text,
                                       company_address: EmailController.text,
-                                      company_size: dropdownValue1, photo: imagepath??" "
+                                      company_size: dropdownValue1, photo: imagepath??" ",
+                                      company_industry: x
                                   );
 
                                 },

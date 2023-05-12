@@ -28,6 +28,7 @@ class UpdateProfileCubit extends Cubit<UpdateStates> {
     required String contact_person_phone_number,
     required String company_address,
     required String company_size,
+    required String company_industry,
     required String photo,
   })async
   {
@@ -40,7 +41,9 @@ class UpdateProfileCubit extends Cubit<UpdateStates> {
       "contact_person_phone_number":contact_person_phone_number,
       "company_address":company_address,
       "company_size":company_size,
+      "company_industry":company_industry,
       "photo":photo
+
     };
     final jsonData = json.encode(data);
     final response = await http.patch(uri, headers: {

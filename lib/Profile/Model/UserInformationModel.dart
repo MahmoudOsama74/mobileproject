@@ -27,12 +27,12 @@ class User {
   String? createdAt;
   String? updatedAt;
   String? contactPersonName;
-  Null? companyIndustry;
+  String? companyIndustry;
   String? contactPersonPhoneNumber;
   String? companyAddress;
   String? companySize;
-  int? lang;
-  int? lat;
+  double? lang;
+  double? lat;
   String? photo;
 
   User(

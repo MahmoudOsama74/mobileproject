@@ -30,6 +30,7 @@ class _SignUpFormState extends State<SignUpForm> {
   var passwordController = TextEditingController();
   var CnameController = TextEditingController();
   var PnameController = TextEditingController();
+  var CompanyAdressController = TextEditingController();
   var CindustryController = TextEditingController();
   var emailController = TextEditingController();
   var phoneNumberController = TextEditingController();
@@ -82,6 +83,11 @@ class _SignUpFormState extends State<SignUpForm> {
                 if (val!.isEmpty) return 'Empty';
                 return null;
               },),
+              inputFieldTest(
+                CompanyAdressController, "Company Address", TextInputType.name, (val) {
+                      if (val!.isEmpty) return 'Empty';
+                      return null;
+                    },),
               inputFieldTest(
                 PnameController, "Contact Person Name", TextInputType.name, (
                   val) {
@@ -289,10 +295,11 @@ class _SignUpFormState extends State<SignUpForm> {
                           PnameController.text.toString(),
                           phoneNumberController.text.toString(),
                           emailController.text.toString(),
+                          CompanyAdressController.text.toString(),
                           dropdownValue,
-                          x,
                           passwordController.text.toString(),
                           confirmPasswordController.text.toString(),
+                          x,
 
 
                       );
