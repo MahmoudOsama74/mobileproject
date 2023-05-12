@@ -251,16 +251,44 @@ class _UpdateScreenState extends State<UpdateScreen> {
                               },
                             ),
                             SizedBox(height: screenHeight * 0.02),
-                            dropDownInputFieldTest(
-                              'Company Size',
-                              dropdownValue1,
-                              <String>[
-                                'None',
-                                'Micro',
-                                'Small',
-                                'Mini',
-                                'Large',
-                              ],
+                            Padding(
+                              padding:
+                              const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                              child: DropdownButtonFormField(
+                                decoration:  const InputDecoration(
+                                  labelText: "Company Size  \n",
+                                  labelStyle: TextStyle(fontSize: 20, color: Colors.black),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                                    borderSide: BorderSide.none,
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                                    borderSide: BorderSide.none,
+                                  ),
+                                  filled: true,
+                                ),
+                                dropdownColor: Colors.white,
+                                value: dropdownValue1,
+                                onChanged: (String? newValue2) {
+                                  dropdownValue1 = newValue2!;
+                                },
+                                items:[
+                                  'None',
+                                  'Micro',
+                                  'Small',
+                                  'Mini',
+                                  'Large',
+                                ].map<DropdownMenuItem<String>>((String value) {
+                                  return DropdownMenuItem<String>(
+                                    value: value,
+                                    child: Text(
+                                      value,
+                                      style: const TextStyle(fontSize: 18, color: Colors.black),
+                                    ),
+                                  );
+                                }).toList(),
+                              ),
                             ),
                             Padding(
                               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
