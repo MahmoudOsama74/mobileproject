@@ -33,9 +33,10 @@ class ResetPasswordState extends State<ResetPassword> {
         listener: (context, state) {
           if (state is UpdatePasswordSuccessState){
             showToast(state.updatePasswordModel.message,Colors.green,Colors.white);
+            Navigator.pop(context);
           }
           if (state is UpdatePasswordErrorState){
-            showToast("update Password not Successfully",Colors.red,Colors.white);
+            showToast(state.updatePasswordModel.message,Colors.red,Colors.white);
           }
 
         },
@@ -100,9 +101,7 @@ class ResetPasswordState extends State<ResetPassword> {
                                     new_password: _newPassword.text,
                                     new_password_confirmation: _confirmPassword.text
                                 );
-                                if(state is UpdatePasswordSuccessState){
-                                  Navigator.pop(context);
-                                }
+
                               },
                             ),
                           ),

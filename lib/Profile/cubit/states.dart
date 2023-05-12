@@ -49,9 +49,9 @@ class UpdatePasswordSuccessState extends UpdateStates
 
 class UpdatePasswordErrorState extends UpdateStates
 {
-  final String error;
+  late UpdatePasswordModel updatePasswordModel;
 
-  UpdatePasswordErrorState(this.error);
+  UpdatePasswordErrorState(this.updatePasswordModel);
 }
 
 class ShopChangePasswordVisibilityState extends UpdateStates {}

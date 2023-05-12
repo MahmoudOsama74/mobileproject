@@ -28,21 +28,26 @@ class UpdateProfileCubit extends Cubit<UpdateStates> {
     required String contact_person_phone_number,
     required String company_address,
     required String company_size,
+    required String photo,
   })async
   {
     emit(UpdateProfileLoadingState());
     final uri =
     Uri.https('mobileenterpriseapplication-production.up.railway.app', '/api/Auth/update');
-    final response = await http.patch(uri, headers: {
-      HttpHeaders.contentTypeHeader: 'application/json',
-      HttpHeaders.authorizationHeader:token != null?'Bearer $token':'Bearer',
-    },body: {
+    final data ={
       "name":name,
       "contact_person_name":contact_person_name,
       "contact_person_phone_number":contact_person_phone_number,
       "company_address":company_address,
-      "company_size":company_size
-    });
+      "company_size":company_size,
+      "photo":photo
+    };
+    final jsonData = json.encode(data);
+    final response = await http.patch(uri, headers: {
+      HttpHeaders.contentTypeHeader: 'application/json',
+      HttpHeaders.authorizationHeader:token != null?'Bearer $token':'Bearer',
+    },body:jsonData
+    );
     print(response.statusCode);
     print(response.body);
     if(response.statusCode==201){
@@ -56,7 +61,7 @@ class UpdateProfileCubit extends Cubit<UpdateStates> {
   }
   void userData()async
   {
-    emit(UpdateProfileLoadingState());
+    emit(UserInformationLoadingState());
     final uri =
     Uri.https('mobileenterpriseapplication-production.up.railway.app', '/api/Auth/getCompany');
     final response = await http.get(uri, headers: {
@@ -68,10 +73,10 @@ class UpdateProfileCubit extends Cubit<UpdateStates> {
     if(response.statusCode==201){
       print("response");
       userInformationModel = UserInformationModel.fromJson(json.decode(response.body));
-      emit(UpdateProfileSuccessState(updateProfileModel!));
+      emit(UserInformationSuccessState(userInformationModel!));
     }
     else{
-      emit(UpdateProfileErrorState(response.body.toString()));
+      emit(UserInformationErrorState(response.body.toString()));
     }
   }
 }
@@ -90,14 +95,16 @@ class UpdatePasswordCubit extends Cubit<UpdateStates> {
     emit(UpdatePasswordLoadingState());
     final uri =
     Uri.https('mobileenterpriseapplication-production.up.railway.app', '/api/Auth/changePassword');
-    final response = await http.patch(uri, headers: {
-      HttpHeaders.contentTypeHeader: 'application/json',
-      HttpHeaders.authorizationHeader:token != null?'Bearer $token':'Bearer',
-    },body: {
+    final data ={
       "old_password":old_password,
       "new_password":new_password,
       "new_password_confirmation":new_password_confirmation
-    });
+    };
+    final jsonData = json.encode(data);
+    final response = await http.patch(uri, headers: {
+      HttpHeaders.contentTypeHeader: 'application/json',
+      HttpHeaders.authorizationHeader:token != null?'Bearer $token':'Bearer',
+    },body:jsonData);
     print(response.statusCode);
     print(response.body);
     if(response.statusCode==200){
@@ -106,7 +113,8 @@ class UpdatePasswordCubit extends Cubit<UpdateStates> {
       emit(UpdatePasswordSuccessState(updatePasswordModel!));
     }
     else{
-      emit(UpdateProfileErrorState(response.body.toString()));
+      updatePasswordModel = UpdatePasswordModel.fromJson(json.decode(response.body));
+      emit(UpdatePasswordErrorState(updatePasswordModel!));
     }
   }
 }

@@ -59,7 +59,7 @@ class SignUpCubit extends Cubit<SignUpStates> {
     required String password,
     required String password_confirmation,
     required double lat,
-    required double lang,
+    required double langg,
   }) async {
     emit(SignUpLoadingState());
     final queryParameters = {
@@ -71,14 +71,17 @@ class SignUpCubit extends Cubit<SignUpStates> {
       "company_size": company_size,
       "password":password,
       "password_confirmation":password_confirmation,
-      "lat":lat,
-      "lang":lang
+      "lat":lat.toString(),
+      "lang":langg.toString()
     };
+    print("JJJJJJJJJJJJj");
     final uri =
     Uri.https('mobileenterpriseapplication-production.up.railway.app', '/api/Auth/register', queryParameters);
+    print(uri);
     final response = await http.post(uri, headers: {
       HttpHeaders.contentTypeHeader: 'application/json',
     });
+    print("JJJJJJJJJJJJj");
     print(response.statusCode);
     print(response.body);
     if(response.statusCode==201){

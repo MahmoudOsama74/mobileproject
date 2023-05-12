@@ -175,13 +175,46 @@ class _SignUpFormState extends State<SignUpForm> {
                     }),
               ),
               const SizedBox(height: 20.0),
-              dropDownInputFieldTest('Company Size', dropdownValue, [
-                'None',
-                'Micro',
-                'Small',
-                'Mini',
-                'Large',
-              ]),
+                    Padding(
+                      padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                      child: DropdownButtonFormField(
+                        decoration:  const InputDecoration(
+                          labelText: "Company Size  \n",
+                          labelStyle: TextStyle(fontSize: 20, color: Colors.black),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                            borderSide: BorderSide.none,
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                            borderSide: BorderSide.none,
+                          ),
+                          filled: true,
+                        ),
+                        dropdownColor: Colors.white,
+                        value: dropdownValue,
+                        onChanged: (String? newValue2) {
+                          dropdownValue = newValue2!;
+                        },
+                        items:[
+                          'None',
+                          'Micro',
+                          'Small',
+                          'Mini',
+                          'Large',
+                        ].map<DropdownMenuItem<String>>((String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(
+                              value,
+                              style: const TextStyle(fontSize: 18, color: Colors.black),
+                            ),
+                          );
+                        }).toList(),
+                      ),
+                    ),
+
               Padding(
                 padding: const EdgeInsets.symmetric(
                     horizontal: 20, vertical: 10),
@@ -249,7 +282,8 @@ class _SignUpFormState extends State<SignUpForm> {
                                   password: passwordController.text,
                                   password_confirmation: confirmPasswordController.text
                               );*/
-
+                       print("object");
+                       print(dropdownValue);
                       UserRegister userRegister = UserRegister(
                           CnameController.text.toString(),
                           PnameController.text.toString(),

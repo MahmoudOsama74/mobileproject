@@ -319,7 +319,7 @@ class _UpdateScreenState extends State<UpdateScreen> {
                                       contact_person_name: PnameController.text,
                                       contact_person_phone_number: phoneController.text,
                                       company_address: EmailController.text,
-                                      company_size: dropdownValue1
+                                      company_size: dropdownValue1, photo: imagepath??" "
                                   );
 
                                 },
