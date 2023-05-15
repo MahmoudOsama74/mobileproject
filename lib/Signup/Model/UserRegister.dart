@@ -7,6 +7,7 @@ class UserRegister{
   late String company_size;
   late String password;
   late String password_confirmation;
+  late String company_industry;
 
   UserRegister(
       this.name,
@@ -16,5 +17,7 @@ class UserRegister{
       this.company_address,
       this.company_size,
       this.password,
-      this.password_confirmation);
+      this.password_confirmation,
+      this.company_industry
+      );
 }

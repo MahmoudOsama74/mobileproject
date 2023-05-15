@@ -9,6 +9,8 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:lottie/lottie.dart';
 
 import '../../Login/components/LoginPage.dart';
+import '../../Profile/UpdateProfile.dart';
+import '../../shared/components/toast.dart';
 import '../Model/UserRegister.dart';
 import '../cubit/cubit.dart';
 import '../cubit/states.dart';
@@ -54,7 +56,19 @@ class _LocationForUser extends State<LocationForUser> {
         ),
       ],
       child: BlocConsumer<SignUpCubit, SignUpStates>(
-        listener: (context, state) {},
+        listener: (context, state) {
+          if (state is SignUpSuccessState){
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => LoginForm()),
+            );
+            showToast(state.signUpModel.message,Colors.green,Colors.white);
+          }
+          if (state is SignUpErrorState){
+            showToast(state.error,Colors.red,Colors.white);
+          }
+        },
         builder: (context, state) {
           return Scaffold(
             body: _buildBody(context),
@@ -103,21 +117,38 @@ class _LocationForUser extends State<LocationForUser> {
                       onPressed: () {
                         _gotoUserCurrentPosition();
                         print(widget.userRegister.name);
-
+                        print(widget.userRegister.email);
+                        print(widget.userRegister.contact_person_name);
+                        print(widget.userRegister.contact_person_phone_number);
+                        print(widget.userRegister.company_address);
+                        print(widget.userRegister.company_size);
+                        print(widget.userRegister.password);
+                        print(widget.userRegister.password_confirmation);
+                        double latt=_draggedLatlng.latitude;
+                        double langg=_draggedLatlng.longitude;
+                        print(_draggedLatlng.longitude);
+                        print(widget.userRegister.company_industry);
                         SignUpCubit.get(context).userSignUp(
                             name: widget.userRegister.name,
                             contact_person_name: widget.userRegister.contact_person_name,
                             contact_person_phone_number: widget.userRegister.contact_person_phone_number,
                             email: widget.userRegister.email,
                             company_address: widget.userRegister.company_address,
-                            company_size: widget.userRegister.company_size,
+                            company_size: widget.userRegister.company_size==""?"Micro":widget.userRegister.company_size,
                             password: widget.userRegister.password,
-                            password_confirmation: widget.userRegister.password_confirmation
+                            password_confirmation: widget.userRegister.password_confirmation,
+                            lat: latt,
+                            langg: langg,
+                            company_industry:widget.userRegister.company_industry
+
                         );
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => LoginForm()),
-                        );
+                        if(SignUpCubit.get(context).state is SignUpSuccessState){
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => LoginForm()),
+                          );
+                        }
+
                       },
                       child: const Icon(Icons.task_alt_rounded),
                     ),

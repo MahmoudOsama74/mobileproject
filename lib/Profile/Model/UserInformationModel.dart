@@ -1,10 +1,10 @@
-class UpdateProfileModel {
+class UserInformationModel {
   String? message;
   User? user;
 
-  UpdateProfileModel({this.message, this.user});
+  UserInformationModel({this.message, this.user});
 
-  UpdateProfileModel.fromJson(Map<String, dynamic> json) {
+  UserInformationModel.fromJson(Map<String, dynamic> json) {
     message = json['message'];
     user = json['user'] != null ? new User.fromJson(json['user']) : null;
   }
@@ -23,7 +23,7 @@ class User {
   int? id;
   String? name;
   String? email;
-  String? emailVerifiedAt;
+  Null? emailVerifiedAt;
   String? createdAt;
   String? updatedAt;
   String? contactPersonName;
@@ -33,6 +33,7 @@ class User {
   String? companySize;
   double? lang;
   double? lat;
+  String? photo;
 
   User(
       {this.id,
@@ -47,7 +48,8 @@ class User {
         this.companyAddress,
         this.companySize,
         this.lang,
-        this.lat});
+        this.lat,
+        this.photo});
 
   User.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -63,6 +65,7 @@ class User {
     companySize = json['company_size'];
     lang = json['lang'];
     lat = json['lat'];
+    photo = json['photo'];
   }
 
   Map<String, dynamic> toJson() {
@@ -80,6 +83,7 @@ class User {
     data['company_size'] = this.companySize;
     data['lang'] = this.lang;
     data['lat'] = this.lat;
+    data['photo'] = this.photo;
     return data;
   }
 }

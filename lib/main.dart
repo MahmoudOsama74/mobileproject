@@ -1,7 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:mobileproject/sharedFile/shared/Presentations/MainPage.dart';
 import 'Login/components/LoginPage.dart';
 import 'Login/components/constants.dart';
 import 'Profile/CompanyProfile.dart';
@@ -9,7 +7,6 @@ import 'Profile/UpdateProfile.dart';
 
 import 'ServicesPage/Business Services/bServicesList.dart';
 
-import 'ServicesPage/Business Services/buisnessFav.dart';
 import 'Signup/components/LocationCompelete.dart';
 import 'Signup/components/signup_form.dart';
 import 'constants.dart';
@@ -55,7 +52,7 @@ class MyApp extends StatelessWidget {
               borderSide: BorderSide.none,
             ),
           )),
-      home: homePage(),
+      home: LoginForm(),
     );
   }
 }

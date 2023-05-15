@@ -30,6 +30,7 @@ class _SignUpFormState extends State<SignUpForm> {
   var passwordController = TextEditingController();
   var CnameController = TextEditingController();
   var PnameController = TextEditingController();
+  var CompanyAdressController = TextEditingController();
   var CindustryController = TextEditingController();
   var emailController = TextEditingController();
   var phoneNumberController = TextEditingController();
@@ -82,6 +83,11 @@ class _SignUpFormState extends State<SignUpForm> {
                 if (val!.isEmpty) return 'Empty';
                 return null;
               },),
+              inputFieldTest(
+                CompanyAdressController, "Company Address", TextInputType.name, (val) {
+                      if (val!.isEmpty) return 'Empty';
+                      return null;
+                    },),
               inputFieldTest(
                 PnameController, "Contact Person Name", TextInputType.name, (
                   val) {
@@ -175,13 +181,46 @@ class _SignUpFormState extends State<SignUpForm> {
                     }),
               ),
               const SizedBox(height: 20.0),
-              dropDownInputFieldTest('Company Size', dropdownValue, [
-                'None',
-                'Micro',
-                'Small',
-                'Mini',
-                'Large',
-              ]),
+                    Padding(
+                      padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                      child: DropdownButtonFormField(
+                        decoration:  const InputDecoration(
+                          labelText: "Company Size  \n",
+                          labelStyle: TextStyle(fontSize: 20, color: Colors.black),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                            borderSide: BorderSide.none,
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                            borderSide: BorderSide.none,
+                          ),
+                          filled: true,
+                        ),
+                        dropdownColor: Colors.white,
+                        value: dropdownValue,
+                        onChanged: (String? newValue2) {
+                          dropdownValue = newValue2!;
+                        },
+                        items:[
+                          'None',
+                          'Micro',
+                          'Small',
+                          'Mini',
+                          'Large',
+                        ].map<DropdownMenuItem<String>>((String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(
+                              value,
+                              style: const TextStyle(fontSize: 18, color: Colors.black),
+                            ),
+                          );
+                        }).toList(),
+                      ),
+                    ),
+
               Padding(
                 padding: const EdgeInsets.symmetric(
                     horizontal: 20, vertical: 10),
@@ -249,16 +288,19 @@ class _SignUpFormState extends State<SignUpForm> {
                                   password: passwordController.text,
                                   password_confirmation: confirmPasswordController.text
                               );*/
-
+                       print("object");
+                       print(dropdownValue);
                       UserRegister userRegister = UserRegister(
                           CnameController.text.toString(),
                           PnameController.text.toString(),
                           phoneNumberController.text.toString(),
                           emailController.text.toString(),
+                          CompanyAdressController.text.toString(),
                           dropdownValue,
-                          x,
                           passwordController.text.toString(),
-                          confirmPasswordController.text.toString()
+                          confirmPasswordController.text.toString(),
+                          x,
+
 
                       );
                       Navigator.push(

@@ -2,6 +2,7 @@
 
 import '../Model/ResetPassword.dart';
 import '../Model/UpdateProfileModel.dart';
+import '../Model/UserInformationModel.dart';
 
 abstract class UpdateStates {}
 
@@ -15,12 +16,25 @@ class UpdateProfileSuccessState extends UpdateStates
 
   UpdateProfileSuccessState(this.updateProfileModel);
 }
+class UserInformationSuccessState extends UpdateStates
+{
+  late UserInformationModel userInformationModel;
+
+  UserInformationSuccessState(this.userInformationModel);
+}
 
 class UpdateProfileErrorState extends UpdateStates
 {
   final String error;
 
   UpdateProfileErrorState(this.error);
+}
+class UserInformationLoadingState extends UpdateStates {}
+class UserInformationErrorState extends UpdateStates
+{
+  final String error;
+
+  UserInformationErrorState(this.error);
 }
 class UpdatePasswordInitialState extends UpdateStates {}
 
@@ -35,9 +49,9 @@ class UpdatePasswordSuccessState extends UpdateStates
 
 class UpdatePasswordErrorState extends UpdateStates
 {
-  final String error;
+  late UpdatePasswordModel updatePasswordModel;
 
-  UpdatePasswordErrorState(this.error);
+  UpdatePasswordErrorState(this.updatePasswordModel);
 }
 
 class ShopChangePasswordVisibilityState extends UpdateStates {}

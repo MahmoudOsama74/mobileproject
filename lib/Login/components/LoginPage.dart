@@ -37,9 +37,15 @@ class LoginForm extends StatelessWidget {
               token = state.loginModel.accessToken;
               showToast("Successfully Login ",Colors.green,Colors.white);
             });
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => UpdateScreen()),
+              );
+
           }
           if(state is LoginErrorState){
-            showToast(UNEXPECTEDERROR,Colors.red,Colors.white);
+            showToast(state.error,Colors.red,Colors.white);
           }
         },
         builder: (context, state) {
@@ -131,10 +137,7 @@ class LoginForm extends StatelessWidget {
                                     email: username.text,
                                     password: passwordController.text,
                                   );
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(builder: (context) => UpdateScreen()),
-                                  );
+
                                 }
                               },
                               child: Text(

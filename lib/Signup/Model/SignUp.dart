@@ -1,45 +1,77 @@
-import 'dart:convert';
+class SignUpModel {
+  String? message;
+  User? user;
 
-class SignUpModel
-{
-  late String message;
-  late SignUpData? user;
+  SignUpModel({this.message, this.user});
 
-  SignUpModel({required this.message,required this.user});
-  factory SignUpModel.fromJson(Map<String, dynamic> jsonn)
-  {
-    print("fffff");
-    SignUpModel L= SignUpModel(
-        message: jsonn['message'] as String,
-        user:jsonn['user'] != null ? SignUpData.fromJson(jsonn['user']) : null
-    );
+  SignUpModel.fromJson(Map<String, dynamic> json) {
+    message = json['message'];
+    user = json['user'] != null ? new User.fromJson(json['user']) : null;
+  }
 
-    return L;
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['message'] = this.message;
+    if (this.user != null) {
+      data['user'] = this.user!.toJson();
+    }
+    return data;
   }
 }
 
-class SignUpData
-{
-  late int id;
-  late String name;
-  late String contact_person_name;
-  late String contact_person_phone_number;
-  late String email;
-  late String company_address;
-  late String company_size;
-  SignUpData({required this.id,required this.name,required this.contact_person_name,required this.contact_person_phone_number,
-    required this.email,required this.company_address,required this.company_size,});
-  // named constructor
-  factory SignUpData.fromJson(Map<String, dynamic> jsonn)
-  {
-    return SignUpData(
-      name : jsonn['name'] as String,
-      contact_person_name :jsonn['contact_person_name'] as String,
-      contact_person_phone_number :jsonn['contact_person_phone_number']as String,
-      email : jsonn['email'] as String,
-      company_address : jsonn['company_address'] as String,
-      company_size : jsonn['company_size'] as String,
-      id:jsonn['id'] as int
-    );
+class User {
+  String? name;
+  String? contactPersonName;
+  String? contactPersonPhoneNumber;
+  String? email;
+  String? lang;
+  String? lat;
+  String? companyAddress;
+  String? companySize;
+  String? updatedAt;
+  String? createdAt;
+  int? id;
+
+  User(
+      {this.name,
+        this.contactPersonName,
+        this.contactPersonPhoneNumber,
+        this.email,
+        this.lang,
+        this.lat,
+        this.companyAddress,
+        this.companySize,
+        this.updatedAt,
+        this.createdAt,
+        this.id});
+
+  User.fromJson(Map<String, dynamic> json) {
+    name = json['name'];
+    contactPersonName = json['contact_person_name'];
+    contactPersonPhoneNumber = json['contact_person_phone_number'];
+    email = json['email'];
+    lang = json['lang'];
+    lat = json['lat'];
+    companyAddress = json['company_address'];
+    companySize = json['company_size'];
+    updatedAt = json['updated_at'];
+    createdAt = json['created_at'];
+    id = json['id'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['name'] = this.name;
+    data['contact_person_name'] = this.contactPersonName;
+    data['contact_person_phone_number'] = this.contactPersonPhoneNumber;
+    data['email'] = this.email;
+    data['lang'] = this.lang;
+    data['lat'] = this.lat;
+    data['company_address'] = this.companyAddress;
+    data['company_size'] = this.companySize;
+    data['updated_at'] = this.updatedAt;
+    data['created_at'] = this.createdAt;
+    data['id'] = this.id;
+    return data;
   }
 }

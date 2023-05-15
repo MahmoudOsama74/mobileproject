@@ -13,34 +13,44 @@ import '../../Login/components/constants.dart';
 import '../Model/ResetPassword.dart';
 import '../Model/UpdateProfileModel.dart';
 import 'package:http/http.dart' as http;
+
+import '../Model/UserInformationModel.dart';
 class UpdateProfileCubit extends Cubit<UpdateStates> {
   UpdateProfileCubit() : super(UpdateProfileInitialState());
 
   static UpdateProfileCubit get(context) => BlocProvider.of(context);
 
   UpdateProfileModel? updateProfileModel;
-
+  UserInformationModel? userInformationModel;
   void userUpdate({
     required String name,
     required String contact_person_name,
     required String contact_person_phone_number,
     required String company_address,
     required String company_size,
+    required String company_industry,
+    required String photo,
   })async
   {
     emit(UpdateProfileLoadingState());
     final uri =
     Uri.https('mobileenterpriseapplication-production.up.railway.app', '/api/Auth/update');
-    final response = await http.patch(uri, headers: {
-      HttpHeaders.contentTypeHeader: 'application/json',
-      HttpHeaders.authorizationHeader:token != null?'Bearer $token':'Bearer',
-    },body: {
+    final data ={
       "name":name,
       "contact_person_name":contact_person_name,
       "contact_person_phone_number":contact_person_phone_number,
       "company_address":company_address,
-      "company_size":company_size
-    });
+      "company_size":company_size,
+      "company_industry":company_industry,
+      "photo":photo
+
+    };
+    final jsonData = json.encode(data);
+    final response = await http.patch(uri, headers: {
+      HttpHeaders.contentTypeHeader: 'application/json',
+      HttpHeaders.authorizationHeader:token != null?'Bearer $token':'Bearer',
+    },body:jsonData
+    );
     print(response.statusCode);
     print(response.body);
     if(response.statusCode==201){
@@ -50,6 +60,26 @@ class UpdateProfileCubit extends Cubit<UpdateStates> {
     }
     else{
       emit(UpdateProfileErrorState(response.body.toString()));
+    }
+  }
+  void userData()async
+  {
+    emit(UserInformationLoadingState());
+    final uri =
+    Uri.https('mobileenterpriseapplication-production.up.railway.app', '/api/Auth/getCompany');
+    final response = await http.get(uri, headers: {
+      HttpHeaders.contentTypeHeader: 'application/json',
+      HttpHeaders.authorizationHeader:token != null?'Bearer $token':'Bearer',
+    });
+    print(response.statusCode);
+    print(response.body);
+    if(response.statusCode==201){
+      print("response");
+      userInformationModel = UserInformationModel.fromJson(json.decode(response.body));
+      emit(UserInformationSuccessState(userInformationModel!));
+    }
+    else{
+      emit(UserInformationErrorState(response.body.toString()));
     }
   }
 }
@@ -68,14 +98,16 @@ class UpdatePasswordCubit extends Cubit<UpdateStates> {
     emit(UpdatePasswordLoadingState());
     final uri =
     Uri.https('mobileenterpriseapplication-production.up.railway.app', '/api/Auth/changePassword');
-    final response = await http.patch(uri, headers: {
-      HttpHeaders.contentTypeHeader: 'application/json',
-      HttpHeaders.authorizationHeader:token != null?'Bearer $token':'Bearer',
-    },body: {
+    final data ={
       "old_password":old_password,
       "new_password":new_password,
       "new_password_confirmation":new_password_confirmation
-    });
+    };
+    final jsonData = json.encode(data);
+    final response = await http.patch(uri, headers: {
+      HttpHeaders.contentTypeHeader: 'application/json',
+      HttpHeaders.authorizationHeader:token != null?'Bearer $token':'Bearer',
+    },body:jsonData);
     print(response.statusCode);
     print(response.body);
     if(response.statusCode==200){
@@ -84,7 +116,8 @@ class UpdatePasswordCubit extends Cubit<UpdateStates> {
       emit(UpdatePasswordSuccessState(updatePasswordModel!));
     }
     else{
-      emit(UpdateProfileErrorState(response.body.toString()));
+      updatePasswordModel = UpdatePasswordModel.fromJson(json.decode(response.body));
+      emit(UpdatePasswordErrorState(updatePasswordModel!));
     }
   }
 }
