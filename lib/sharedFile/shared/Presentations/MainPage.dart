@@ -4,14 +4,6 @@ import 'package:conditional_builder_null_safety/conditional_builder_null_safety.
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_nav_bar/google_nav_bar.dart';
-import 'package:shaped_bottom_bar/models/shaped_item_object.dart';
-import 'package:shaped_bottom_bar/shaped_bottom_bar.dart';
-import 'package:shaped_bottom_bar/utils/arrays.dart';
-
-import '../../../Profile/UpdateProfile.dart';
-import '../../../ServicesPage/Business Services/bServicesList.dart';
-import '../../../ServicesPage/Business Services/buisnessFav.dart';
 import '../cubit/cubit.dart';
 import '../cubit/states.dart';
 
@@ -26,126 +18,100 @@ class NavigationDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Drawer(
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              buildHeader(context),
-              buildMenuItems(context),
-            ],
-          ),
-        ),
-      );
-  Widget buildHeader(BuildContext context) => Container(
-        color: const Color(0xFF344E41),
-        padding: EdgeInsets.only(
-          top: MediaQuery.of(context).padding.top,
-        ),
-        child: const SizedBox(
-          height: 15,
-        ),
-      );
-  Widget buildMenuItems(BuildContext context) => Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 3),
-            child: ListTile(
-              leading: const CircleAvatar(
-                radius: 20,
-                backgroundImage: AssetImage('assets/images/porfile.jpg'),
-              ),
-              title: const Text(
-                'Mahmoud Osama',
-                style: TextStyle(fontSize: 20),
-              ),
-              onTap: () {},
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 7, horizontal: 0),
-            child: ListTile(
-              leading: const Icon(Icons.person_pin),
-              title: const Text('Profile'),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return UpdateScreen();
-                    },
-                  ),
-                );
-              },
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 7, horizontal: 0),
-            child: ListTile(
-              leading: const Icon(Icons.content_paste_go),
-              title: const Text('Business Services'),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return  BusinessServicesList();
-                    },
-                  ),
-                );
-              },
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 7, horizontal: 0),
-            child: ListTile(
-              leading: const Icon(Icons.group),
-              title: const Text('Favorite'),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return  BusinessServicesFav();
-                    },
-                  ),
-                );
-              },
-            ),
-          ),
+    child: SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: <Widget>[
+          buildHeader(context),
 
-          const Divider(),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 7, horizontal: 0),
-            child: ListTile(
-              leading: const Icon(Icons.settings),
-              title: const Text('Settings'),
-              onTap: () {
-              },
-            ),
-          ),
-          // Padding(
-          //   padding: const EdgeInsets.symmetric(vertical: 7, horizontal: 0),
-          //   child: ListTile(
-          //     leading: const Icon(Icons.logout),
-          //     title: const Text('Logout'),
-          //     onTap: () {
-          //       signOut(context);
-          //     },
-          //   ),
-          // ),
         ],
-      );
+      ),
+    ),
+  );
+  Widget buildHeader(BuildContext context) => Container(
+    color: const Color(0xFF344E41),
+    padding: EdgeInsets.only(
+      top: MediaQuery.of(context).padding.top,
+    ),
+    child: const SizedBox(
+      height: 15,
+    ),
+  );
+
 }
 
 class _homePageState extends State<homePage> {
-  @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    throw UnimplementedError();
+    return BlocProvider(
+      create: (BuildContext context) => AppCubit(),
+      child: BlocConsumer<AppCubit, AppStates>(
+        listener: (BuildContext context, AppStates state) {},
+        builder: (BuildContext context, AppStates state) {
+          AppCubit cubit = AppCubit.get(context);
+          return Scaffold(
+            appBar: AppBar(
+              title: Text(cubit.titles[cubit.currentIndex],style: const TextStyle(color:Color(
+                  0xFFF0F3F1) ),),
+              backgroundColor: const Color(0xFF04342A),
+            ),
+            drawer: const NavigationDrawer(),
+            body: ConditionalBuilder(
+              condition: true,
+              builder: (context) => cubit.screens[cubit.currentIndex],
+              fallback: (context) =>
+              const Center(child: CircularProgressIndicator()),
+            ),
+            bottomNavigationBar: Container(
+                decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(30), topLeft: Radius.circular(30)),
+                  boxShadow: [
+                    BoxShadow(color: Colors.black38, spreadRadius: 0, blurRadius: 10),
+                  ],
+                ),
+                child: ClipRRect(
+                  borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(30.0),
+                    topRight: Radius.circular(30.0),
+                  ),
+                  child: BottomNavigationBar(
+                    backgroundColor: Colors.white,
+                    unselectedItemColor: const Color(0xFF344E41),
+                    fixedColor: const Color(0xFF01110E),
+                    type: BottomNavigationBarType.fixed,
+                    currentIndex: cubit.currentIndex,
+                    selectedIconTheme: const IconThemeData(size: 40,color: Color(0xFF02413C)),
+                    onTap: (index) {
+                      cubit.changeIndex(index);
+                    },
+                    items:const [
+                      BottomNavigationBarItem(
+                        icon: Icon(
+                          Icons.person,
+                        ),
+                        label: 'Profile',
+                      ),
+                      BottomNavigationBarItem(
+                        icon: Icon(
+                          Icons.file_copy_sharp,
+                        ),
+                        label: 'Business Services',
+                      ),
+                      BottomNavigationBarItem(
+                        icon: Icon(
+                          Icons.favorite,
+                        ),
+                        label: 'Favourite',
+                      ),
+
+                    ],
+                  ),
+                )
+            ),
+
+          );
+        },
+      ),
+    );
   }
-
-
-  }
-
-
-
+}

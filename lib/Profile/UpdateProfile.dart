@@ -204,7 +204,7 @@ class _UpdateScreenState extends State<UpdateScreen> {
                         },
                       ),
                       SizedBox(height: screenHeight * 0.015),
-                      inputFieldTest2(
+                      inputFieldTestRead(
                         EmailController,
                         "Email Address",
                         TextInputType.emailAddress,

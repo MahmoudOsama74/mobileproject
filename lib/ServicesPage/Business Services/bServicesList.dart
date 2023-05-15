@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../model/bServicesModel.dart';
+import 'AddService.dart';
 import 'bServicesCard.dart';
 
 
@@ -12,8 +13,6 @@ class BusinessServicesList extends StatelessWidget {
   var _formKey101 = GlobalKey<FormState>();
   final TextEditingController Cname = TextEditingController();
   final TextEditingController Bdiscription = TextEditingController();
-  final TextEditingController TimeController = TextEditingController();
-  final TextEditingController DateController = TextEditingController();
   IconData fabIcon2=Icons.add;
   var rng = Random();
 
@@ -28,12 +27,13 @@ class BusinessServicesList extends StatelessWidget {
         backgroundColor:Colors.white ,
         foregroundColor: Colors.white,
         onPressed: () {
-          scaffoldKey.currentState?.showBottomSheet((context) =>
-              const SizedBox(
-                height: 400,
-                child: SingleChildScrollView(
-                ),
-              ),
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) {
+                return AddService();
+              },
+            ),
           );
         },
 
@@ -44,7 +44,7 @@ class BusinessServicesList extends StatelessWidget {
             child: ListView.builder(
               physics: const BouncingScrollPhysics(),
               itemBuilder: (context, index) =>
-                  bloodPressureCard(context,BusinessServicesData(),scaffoldKey,index),
+                  bServicesCard(context,BusinessServicesData(),scaffoldKey,index),
               itemCount: 5,
             ),
           ),

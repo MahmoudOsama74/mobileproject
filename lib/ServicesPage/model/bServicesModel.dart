@@ -5,17 +5,17 @@ class BusinessServicesData {
   String? id;
   String? Cname;
   String? Bdiscription;
-  String? date;
-  String? time;
-  String? amPm;
+  String? BName;
+  String? location;
+
+
 
 
 
   BusinessServicesData({this.id,
-    this.date,
     this.Bdiscription,
     this.Cname,
-    this.time,
-    this.amPm,
+    this.BName ,
+    this.location,
   });
 }

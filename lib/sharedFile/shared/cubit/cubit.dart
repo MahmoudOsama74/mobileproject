@@ -23,9 +23,9 @@ class AppCubit extends Cubit<AppStates> {
   ];
 
   List<String> titles = [
-    'UpdateScreen',
-    'BusinessServicesList',
-    'BusinessServicesFav',
+    'Profile',
+    'Business Services',
+    'Favourite',
   ];
 
   void changeIndex(int index) {

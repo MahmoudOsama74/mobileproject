@@ -14,7 +14,7 @@ import '../Cubit/FavoriteIcon.dart';
 
 
 
-Widget bServicesCard(BuildContext context, bloodPressureModel,GlobalKey<ScaffoldState> scaffoldKey,int index){
+Widget favServicesCard(BuildContext context, bloodPressureModel,GlobalKey<ScaffoldState> scaffoldKey,int index){
   var _formKey105 = GlobalKey<FormState>();
   final TextEditingController Cname = TextEditingController();
   final TextEditingController Bdiscription = TextEditingController();
@@ -25,9 +25,9 @@ Widget bServicesCard(BuildContext context, bloodPressureModel,GlobalKey<Scaffold
   var rng = Random();
   return Card(
     elevation: 17,
-        shape: RoundedRectangleBorder(
-         borderRadius: BorderRadius.circular(10),
-       ),
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(10),
+    ),
     child: Padding(
       padding: const EdgeInsets.symmetric(vertical: 1,horizontal: 2),
       child: Column(
@@ -62,18 +62,18 @@ Widget bServicesCard(BuildContext context, bloodPressureModel,GlobalKey<Scaffold
                   create: (_) => FavoriteProvider(),
                   child: Consumer<FavoriteProvider>(
                     builder: (context, favoriteProvider, _) =>
-                     IconButton(
-                      icon: Icon(
-                        favoriteProvider.isBookmarked? Icons.favorite : Icons.favorite_outline,
-                        color: Colors.blue,
-                      ),
-                      onPressed: () {favoriteProvider.isBookmarked =!favoriteProvider.isBookmarked;},
-                    ),
+                        IconButton(
+                          icon: Icon(
+                            favoriteProvider.isBookmarked? Icons.favorite_outline : Icons.favorite,
+                            color: Colors.blue,
+                          ),
+                          onPressed: () {favoriteProvider.isBookmarked =!favoriteProvider.isBookmarked;},
+                        ),
                   ),
                 ),
-                ],
-              ),
-           ),
+              ],
+            ),
+          ),
 
           Padding(
             padding: const EdgeInsets.all(16.0),

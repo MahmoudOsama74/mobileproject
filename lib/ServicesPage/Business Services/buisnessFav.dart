@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../model/bServicesModel.dart';
+import 'FavServicesCard.dart';
 import 'bServicesCard.dart';
 
 
@@ -20,29 +21,13 @@ class BusinessServicesFav extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
-      floatingActionButton: FloatingActionButton.small(
-        heroTag: "baseXBtn1",
-        elevation: 20,
-        backgroundColor:Colors.white ,
-        foregroundColor: Colors.white,
-        onPressed: () {
-          scaffoldKey.currentState?.showBottomSheet((context) =>
-          const SizedBox(
-            height: 400,
-            child: SingleChildScrollView(
-            ),
-          ),
-          );
-        },
-
-      ),
       body: Column(
         children: [
           Expanded(
             child: ListView.builder(
               physics: const BouncingScrollPhysics(),
               itemBuilder: (context, index) =>
-                  bloodPressureCard(context,BusinessServicesData(),scaffoldKey,index),
+                  favServicesCard(context,BusinessServicesData(),scaffoldKey,index),
               itemCount: 5,
             ),
           ),

@@ -20,7 +20,7 @@ Widget inputFieldTest(TextEditingController fieldController,String fieldName,Tex
     ),
   );
 }
-Widget inputFieldTest2(TextEditingController fieldController,String fieldName,TextInputType type,validationFunction){
+Widget inputFieldTestRead(TextEditingController fieldController,String fieldName,TextInputType type,validationFunction){
   return Padding(
     padding:
     const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
@@ -37,7 +37,6 @@ Widget inputFieldTest2(TextEditingController fieldController,String fieldName,Te
     ),
   );
 }
-
 Widget dateInputFieldTest(TextEditingController date,BuildContext context,){
   return Padding(
     padding:
