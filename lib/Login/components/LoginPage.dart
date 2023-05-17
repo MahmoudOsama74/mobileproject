@@ -6,6 +6,7 @@ import 'package:mobileproject/shared/Constant/Constant.dart';
 import 'package:mobileproject/shared/components/toast.dart';
 import '../../Profile/UpdateProfile.dart';
 import '../../Signup/components/signup_form.dart';
+import '../../sharedFile/shared/Presentations/MainPage.dart';
 import '../already_have_an_account_acheck.dart';
 
 
@@ -40,7 +41,7 @@ class LoginForm extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => UpdateScreen()),
+                    builder: (context) => homePage()),
               );
 
           }
