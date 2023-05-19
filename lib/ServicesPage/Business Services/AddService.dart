@@ -15,7 +15,7 @@ class AddService extends StatelessWidget {
   final TextEditingController BName = TextEditingController();
   final TextEditingController Bdiscription = TextEditingController();
   final TextEditingController location = TextEditingController();
-
+  String dropdownValue1 = 'IT Services and Support';
   AddService({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -44,11 +44,46 @@ class AddService extends StatelessWidget {
                       const SizedBox(
                         height: 20,
                       ),
-                      inputFieldTest(
-                        BName, "Service Name", TextInputType.name, (val) {
-                        if (val!.isEmpty) return 'Empty';
-                        return null;
-                      },),
+                      Padding(
+                        padding:
+                        const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                        child: DropdownButtonFormField(
+                          decoration:  const InputDecoration(
+                            labelText: "Service Name  \n",
+                            labelStyle: TextStyle(fontSize: 20, color: Colors.black),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.all(Radius.circular(10)),
+                              borderSide: BorderSide.none,
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.all(Radius.circular(10)),
+                              borderSide: BorderSide.none,
+                            ),
+                            filled: true,
+                          ),
+                          dropdownColor: Colors.white,
+                          value: dropdownValue1,
+                          onChanged: (String? newValue2) {
+                            dropdownValue1 = newValue2!;
+                          },
+                          items:[
+                            'IT Services and Support',
+                            'Web Design and Development',
+                            'Graphic Design and Branding',
+                            'Research and Analytics',
+                            'Advertising and Marketing',
+                            'Event Planning and Management',
+                          ].map<DropdownMenuItem<String>>((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(
+                                value,
+                                style: const TextStyle(fontSize: 18, color: Colors.black),
+                              ),
+                            );
+                          }).toList(),
+                        ),
+                      ),
                       inputFieldTest(
                         Bdiscription, "Service Description", TextInputType.name, (val) {
                         if (val!.isEmpty) return 'Empty';
@@ -57,9 +92,11 @@ class AddService extends StatelessWidget {
 
                       onPressedButton("Submit", (){
                         if (_form15.currentState!.validate()) {
+                          print(BName.text);
+                          print(Bdiscription.text);
                           BusinessServiceCubit.get(context).createService(
-                              name: BName.text,
-                              description: Bdiscription.text
+                              name: BName.text.toString(),
+                              description: Bdiscription.text.toString()
                           );
                           Navigator.pop(context);
                         }

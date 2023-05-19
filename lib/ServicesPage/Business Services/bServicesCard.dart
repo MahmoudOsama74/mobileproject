@@ -21,8 +21,9 @@ Widget bServicesCard(BuildContext context,businessService,GlobalKey<ScaffoldStat
   var _formKey105 = GlobalKey<FormState>();
   final TextEditingController Cname = TextEditingController();
   final TextEditingController Bdiscription = TextEditingController();
-  String? imagepath="/data/user/0/com.example.mobileproject/cache/0876f8e6-4a4e-495b-b698-f4abb0abb8eb/IMG-20230125-WA0077.jpg";
-
+  var screenHeight = MediaQuery.of(context).size.height;
+  var screenWidth = MediaQuery.of(context).size.width;
+  String?imagepath="/data/user/0/com.example.mobileproject/cache/8a1bfe30-9b79-4cf1-ae5f-d68a78ee1bbc/IMG-20230519-WA0035.jpg";
   return BlocConsumer<BusinessServiceCubit, BusinessServiceStates>(
     listener: (context, state) {
     },
@@ -50,15 +51,22 @@ Widget bServicesCard(BuildContext context,businessService,GlobalKey<ScaffoldStat
                         ),
                         );
                       },
-                      child:  (imagepath != null)
-                          ? Image.file(
-                        File(imagepath),
-                        fit: BoxFit.cover,
-                        width: double.infinity,
-                        height: double.infinity,
-                      )
-                          : Container(
-                        color: defaultWhite,
+                      child: CircleAvatar(
+                        backgroundColor: defaultTealAccent.withOpacity(0.6),
+                        radius: screenHeight * 0.0388,
+                        child: ClipOval(
+                          child: (imagepath != null)
+                              ? Image.file(
+                            File(imagepath!),
+                            fit: BoxFit.cover,
+                            width: double.infinity,
+                            height: double.infinity,
+                          )
+                              : Container(
+                            color: defaultWhite,
+                          ),
+                        ),
+
                       ),
                     ),
                     const SizedBox(width: 8),

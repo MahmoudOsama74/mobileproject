@@ -7,6 +7,7 @@ class BusinessServicesData {
   String? Bdiscription;
   String? BName;
   String? location;
+  String? CPhoto;
 
 
 
@@ -17,5 +18,6 @@ class BusinessServicesData {
     this.Cname,
     this.BName ,
     this.location,
+    this.CPhoto,
   });
 }
