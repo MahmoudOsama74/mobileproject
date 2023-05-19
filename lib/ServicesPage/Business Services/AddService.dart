@@ -61,14 +61,7 @@ class AddService extends StatelessWidget {
                               name: BName.text,
                               description: Bdiscription.text
                           );
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) {
-                                return BusinessServicesList();
-                              },
-                            ),
-                          );
+                          Navigator.pop(context);
                         }
                       }),
                       const SizedBox(

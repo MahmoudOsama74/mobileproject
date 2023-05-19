@@ -31,6 +31,9 @@ class BusinessServicesList extends StatelessWidget {
         listener: (context, state) {
           if (state is GetAllServiceSuccessState){
           }
+          if(state is AddServiceToFavoriteSuccessState){
+            showToast(state.addServiceToFavoriteModel.message,Colors.green,Colors.white);
+          }
           if (state is GetAllServiceErrorState){
             showToast(state.error,Colors.red,Colors.white);
           }
@@ -43,6 +46,12 @@ class BusinessServicesList extends StatelessWidget {
               elevation: 20,
               backgroundColor:Colors.white ,
               foregroundColor: Colors.white,
+              child:const Icon(
+                Icons.add,
+                color: Color(0xFF04342A),
+                size: 30.0,
+                semanticLabel: 'Text to announce in accessibility modes',
+              ),
               onPressed: () {
                 Navigator.push(
                   context,
@@ -58,7 +67,7 @@ class BusinessServicesList extends StatelessWidget {
             body:Column(
               children: [
                 ConditionalBuilder(
-                  condition: BusinessServiceCubit.get(context).getAllServiceModel!=null,
+                  condition: BusinessServiceCubit.get(context).getAllServiceModel?.services!=null,
                   builder: (context)=>Expanded(
                     child: ListView.builder(
                       physics: const BouncingScrollPhysics(),

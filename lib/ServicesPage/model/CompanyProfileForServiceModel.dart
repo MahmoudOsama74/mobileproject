@@ -25,7 +25,7 @@ class CompanyProfile {
   int? id;
   String? name;
   String? email;
-  Null? emailVerifiedAt;
+  String? emailVerifiedAt;
   String? contactPersonName;
   String? contactPersonPhoneNumber;
   String? companyAddress;

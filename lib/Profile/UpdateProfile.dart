@@ -28,11 +28,11 @@ class UpdateScreen extends StatefulWidget {
 
 class _UpdateScreenState extends State<UpdateScreen> {
   var formKey = GlobalKey<FormState>();
-  var CnameController = TextEditingController(text: "Elgammal-Tech");
-  var PnameController = TextEditingController(text: "Walid Mohamed");
-  var phoneController = TextEditingController(text: "01061090690");
-  var EmailController = TextEditingController(text: "example@gmail.com");
-  var companyAddressController = TextEditingController(text: "Egypt");
+  var CnameController = TextEditingController(text: "");
+  var PnameController = TextEditingController(text: "");
+  var phoneController = TextEditingController(text: "");
+  var EmailController = TextEditingController(text: "");
+  var companyAddressController = TextEditingController(text: "");
   String dropdownValue1 = 'Large';
   List<String> items = [
     'Option 1',
@@ -69,6 +69,8 @@ class _UpdateScreenState extends State<UpdateScreen> {
       ],
       child: BlocConsumer<UpdateProfileCubit, UpdateStates>(
         listener: (context, state) {
+          if(state is UserInformationLoadingState){
+          }
           if(state is UserInformationSuccessState){
             CnameController.text=state.userInformationModel.user?.name??"";
             PnameController.text=state.userInformationModel.user?.contactPersonName??"";
@@ -120,27 +122,6 @@ class _UpdateScreenState extends State<UpdateScreen> {
                         vertical: screenHeight * 0.03),
                     child: Column(
                       children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: const [
-                            BackButton(),
-                            Padding(
-                              padding:
-                              EdgeInsets.symmetric(vertical: 10, horizontal: 5),
-                              child: Text(
-                                " Update Profile",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 27,
-                                  fontStyle: FontStyle.italic,
-                                  color: Color(0xFF588157),
-                                ),
-                                textAlign: TextAlign.left,
-                              ),
-                            ),
-                            Spacer(),
-                          ],
-                        ),
                         Padding(
                           padding:
                           EdgeInsets.symmetric(vertical: screenHeight * 0.01),

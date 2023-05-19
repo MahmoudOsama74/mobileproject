@@ -11,7 +11,7 @@ import '../../Login/components/constants.dart';
 import '../model/AddServiceToFavoritModel.dart';
 import '../model/CompanyProfileForServiceModel.dart';
 import '../model/CreateServiceModel.dart';
-import '../model/GetAllServiceModel.dart';
+import '../model/GetAllServiceModel.dart' as GetAllService;
 import '../model/ServiceOfCompanyMpdel.dart';
 import '../model/allCompanyModel.dart';
 
@@ -24,7 +24,7 @@ class BusinessServiceCubit extends Cubit<BusinessServiceStates> {
   AllCompanyModel? allCompanyModel;
   CompanyProfileForServiceModel? companyProfileForServiceModel;
   CreateServiceModel? createServiceModel;
-  GetAllServiceModel? getAllServiceModel;
+  GetAllService.GetAllServiceModel? getAllServiceModel;
   ServiceOfCompanyModel? serviceOfCompanyModel;
 
   void createService({
@@ -92,13 +92,13 @@ class BusinessServiceCubit extends Cubit<BusinessServiceStates> {
     });
     print(response.statusCode);
     print(response.body);
-    if(response.statusCode==200){
+    if(response.statusCode==201){
       print("response");
-      getAllServiceModel = GetAllServiceModel.fromJson(json.decode(response.body));
+      getAllServiceModel = GetAllService.GetAllServiceModel.fromJson(json.decode(response.body));
       emit(GetAllServiceSuccessState(getAllServiceModel!));
     }
     else{
-      emit(GetAllServiceErrorState(response.body.toString()));
+      emit(GetAllServiceErrorState("error"));
     }
   }
   void getAllCompanies()async{
@@ -130,9 +130,9 @@ class BusinessServiceCubit extends Cubit<BusinessServiceStates> {
     });
     print(response.statusCode);
     print(response.body);
-    if(response.statusCode==200){
+    if(response.statusCode==201){
       print("response");
-      getAllServiceModel = GetAllServiceModel.fromJson(json.decode(response.body));
+      getAllServiceModel = GetAllService.GetAllServiceModel.fromJson(json.decode(response.body));
       emit(GetAllServiceSuccessState(getAllServiceModel!));
     }
     else{
@@ -169,22 +169,24 @@ class BusinessServiceCubit extends Cubit<BusinessServiceStates> {
     required int id,
   })async{
     emit((CompanyProfileForServiceLoadingState()));
-    final uri =
-    Uri.https('mobileenterpriseapplication-production.up.railway.app', '/api/Auth/getServiceCompany');
     final data ={
-      "id":id
+      "id":id.toString()
     };
-    final jsonData = json.encode(data);
-    final response = await http.post(uri, headers: {
+    final uri =
+    Uri.https('mobileenterpriseapplication-production.up.railway.app', '/api/Auth/getServiceCompany',data);
+
+    final response = await http.get(uri, headers: {
       HttpHeaders.contentTypeHeader: 'application/json',
       HttpHeaders.authorizationHeader:token != null?'Bearer $token':'Bearer',
-    },body:jsonData
+    },
     );
     print(response.statusCode);
     print(response.body);
     if(response.statusCode==201){
       print("response");
+      print(json.decode(response.body));
       companyProfileForServiceModel = CompanyProfileForServiceModel.fromJson(json.decode(response.body));
+
       emit(CompanyProfileForServiceSuccessState(companyProfileForServiceModel!));
     }
     else{
