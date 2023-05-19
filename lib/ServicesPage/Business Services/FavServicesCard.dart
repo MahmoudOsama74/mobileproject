@@ -14,14 +14,10 @@ import '../Cubit/FavoriteIcon.dart';
 
 
 
-Widget favServicesCard(BuildContext context, bloodPressureModel,GlobalKey<ScaffoldState> scaffoldKey,int index){
+Widget favServicesCard(BuildContext context,favoriteBusinessService,GlobalKey<ScaffoldState> scaffoldKey,int index){
   var _formKey105 = GlobalKey<FormState>();
   final TextEditingController Cname = TextEditingController();
   final TextEditingController Bdiscription = TextEditingController();
-
-
-
-
   var rng = Random();
   return Card(
     elevation: 17,
@@ -74,7 +70,6 @@ Widget favServicesCard(BuildContext context, bloodPressureModel,GlobalKey<Scaffo
               ],
             ),
           ),
-
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: Column(

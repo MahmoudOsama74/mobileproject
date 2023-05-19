@@ -1,4 +1,31 @@
-class GetAllServiceModel {
+class GetAllServiceModel{
+  String? message;
+  List<Service>? services;
+
+  GetAllServiceModel({this.message, this.services});
+
+  GetAllServiceModel.fromJson(Map<String, dynamic> json) {
+    message = json['message'];
+    if (json['Services'] != null) {
+      services = <Service>[];
+      json['Services'].forEach((v) {
+        services!.add(Service.fromJson(v));
+      });
+    }
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['message'] = this.message;
+    if (this.services != null) {
+      data['Companies'] = this.services!.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
+}
+
+
+class Service {
   int? id;
   String? name;
   String? description;
@@ -6,7 +33,7 @@ class GetAllServiceModel {
   Null? createdAt;
   Null? updatedAt;
 
-  GetAllServiceModel(
+  Service(
       {this.id,
         this.name,
         this.description,
@@ -14,7 +41,7 @@ class GetAllServiceModel {
         this.createdAt,
         this.updatedAt});
 
-  GetAllServiceModel.fromJson(Map<String, dynamic> json) {
+  Service.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     description = json['description'];
