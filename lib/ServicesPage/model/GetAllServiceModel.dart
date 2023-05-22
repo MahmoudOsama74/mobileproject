@@ -30,13 +30,15 @@ class Services {
   String? serviceDescription;
   String? companyName;
   String? companyPhoto;
+  int? companyId;
 
   Services(
       {this.serviceId,
         this.serviceName,
         this.serviceDescription,
         this.companyName,
-        this.companyPhoto});
+        this.companyPhoto,
+        this.companyId});
 
   Services.fromJson(Map<String, dynamic> json) {
     serviceId = json['service_id'];
@@ -44,6 +46,7 @@ class Services {
     serviceDescription = json['service_description'];
     companyName = json['Company_name'];
     companyPhoto = json['Company_photo'];
+    companyId = json['Company_id'];
   }
 
   Map<String, dynamic> toJson() {
@@ -53,6 +56,7 @@ class Services {
     data['service_description'] = this.serviceDescription;
     data['Company_name'] = this.companyName;
     data['Company_photo'] = this.companyPhoto;
+    data['Company_id'] = this.companyId;
     return data;
   }
 }

@@ -6,6 +6,7 @@ import 'package:http/http.dart' as http;
 import 'package:bloc/bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobileproject/ServicesPage/Cubit/BusinessServiceStates.dart';
+import 'package:mobileproject/ServicesPage/model/DistanceCompanyToUser.dart';
 
 import '../../Login/components/constants.dart';
 import '../model/AddServiceToFavoritModel.dart';
@@ -25,7 +26,8 @@ class BusinessServiceCubit extends Cubit<BusinessServiceStates> {
   CompanyProfileForServiceModel? companyProfileForServiceModel;
   CreateServiceModel? createServiceModel;
   GetAllService.GetAllServiceModel? getAllServiceModel;
-  ServiceOfCompanyModel? serviceOfCompanyModel;
+  ServicesOfCompanyModel? serviceOfCompanyModel;
+  DistanceCompanyToUser? distanceCompanyToUser;
 
   void createService({
    required String name,
@@ -143,28 +145,63 @@ class BusinessServiceCubit extends Cubit<BusinessServiceStates> {
     required int id,
   })async{
     emit((ServiceOfCompanyLoadingState()));
-    final uri =
-    Uri.https('mobileenterpriseapplication-production.up.railway.app', '/api/Auth/getCompanyServices');
     final data ={
-      "id":id
+      "id":id.toString()
     };
-    final jsonData = json.encode(data);
-    final response = await http.post(uri, headers: {
+    final uri =
+    Uri.https('mobileenterpriseapplication-production.up.railway.app', '/api/Auth/getCompanyServices',data);
+    final response = await http.get(uri, headers: {
       HttpHeaders.contentTypeHeader: 'application/json',
       HttpHeaders.authorizationHeader:token != null?'Bearer $token':'Bearer',
-    },body:jsonData
+    }
     );
     print(response.statusCode);
     print(response.body);
     if(response.statusCode==201){
       print("response");
-      serviceOfCompanyModel = ServiceOfCompanyModel.fromJson(json.decode(response.body));
+      serviceOfCompanyModel = ServicesOfCompanyModel.fromJson(json.decode(response.body));
+      print(serviceOfCompanyModel?.services);
       emit(ServiceOfCompanySuccessState(serviceOfCompanyModel!));
     }
     else{
       emit(ServiceOfCompanyErrorState(response.body.toString()));
     }
   }
+
+
+  void getDistanceCompanyToUser({
+    required double lat,
+    required double lon,
+    required int service_id,
+  })async{
+    emit((DistanceCompanyToUserLoadingState()));
+    print("object");
+    final data =
+    {
+      "lat":lat.toString(),
+      "lon":lon.toString(),
+      "service_id":service_id.toString()
+    };
+    final uri =
+    Uri.https('mobileenterpriseapplication-production.up.railway.app', '/api/Auth/calculateDistance',data);
+    final response = await http.get(uri, headers: {
+      HttpHeaders.contentTypeHeader: 'application/json',
+      HttpHeaders.authorizationHeader:token != null?'Bearer $token':'Bearer',
+    }
+    );
+    print(response.statusCode);
+    print(response.body);
+    if(response.statusCode==200){
+      print("response");
+      distanceCompanyToUser = DistanceCompanyToUser.fromJson(json.decode(response.body));
+      emit(DistanceCompanyToUserSuccessState(distanceCompanyToUser!));
+    }
+    else{
+      emit(DistanceCompanyToUserErrorState(response.body.toString()));
+    }
+  }
+
+
   void getCompanyProfileForService({
     required int id,
   })async{
