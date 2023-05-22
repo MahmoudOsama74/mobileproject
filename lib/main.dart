@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:mobileproject/test.dart';
 import 'Login/components/LoginPage.dart';
 import 'Login/components/constants.dart';
 import 'Profile/CompanyProfile.dart';
@@ -54,7 +53,7 @@ class MyApp extends StatelessWidget {
               borderSide: BorderSide.none,
             ),
           )),
-      home: BusinessServicesList(),
+      home: LoginForm(),
     );
   }
 }

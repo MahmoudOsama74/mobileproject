@@ -3,6 +3,7 @@ import 'package:mobileproject/ServicesPage/model/CreateServiceModel.dart';
 
 import '../model/AddServiceToFavoritModel.dart';
 import '../model/CompanyProfileForServiceModel.dart';
+import '../model/DistanceCompanyToUser.dart';
 import '../model/GetAllServiceModel.dart';
 import '../model/ServiceOfCompanyMpdel.dart';
 import '../model/allCompanyModel.dart';
@@ -103,6 +104,23 @@ class ServiceOfCompanyErrorState extends BusinessServiceStates
   final String error;
 
   ServiceOfCompanyErrorState(this.error);
+}
+
+
+class DistanceCompanyToUserLoadingState extends BusinessServiceStates {}
+
+class DistanceCompanyToUserSuccessState extends BusinessServiceStates
+{
+  late DistanceCompanyToUser distanceCompanyToUser;
+
+  DistanceCompanyToUserSuccessState(this.distanceCompanyToUser);
+}
+
+class DistanceCompanyToUserErrorState extends BusinessServiceStates
+{
+  final String error;
+
+  DistanceCompanyToUserErrorState(this.error);
 }
 
 

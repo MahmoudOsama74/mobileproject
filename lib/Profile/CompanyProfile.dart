@@ -2,9 +2,9 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../MainComponents/InputFieldTest.dart';
+import '../ServicesPage/Business Services/ServiceForCompany.dart';
 import '../ServicesPage/Cubit/BusinessServiceStates.dart';
 import '../ServicesPage/Cubit/BussinessServiceCubit.dart';
-import '../ServicesPage/model/CompanyProfileForServiceModel.dart';
 import '../shared/components/toast.dart';
 import '../shared/styles/colors.dart';
 import 'package:flutter/foundation.dart';
@@ -63,10 +63,33 @@ class _CompanyScreenState extends State<CompanyScreen> {
                 }
               },
               child: Scaffold(
+                appBar: AppBar(
+                    backgroundColor: const Color(0xFFFFFFFF),
+                    leading: IconButton(
+                      icon: const Icon(Icons.arrow_back, color: Color(0xFF04342A)),
+                      onPressed: () => Navigator.of(context).pop(),
+                    ),
+                    title: Row(children:  [
+                      const Text('Company Profile',
+                        style: TextStyle(fontWeight: FontWeight.bold,color:Color(0xFF04342A), ),
+                      ),
+                      const Spacer(),
+                      ElevatedButton(
+                        onPressed: () async{
+                          Navigator.push(
+                              context,
+                            MaterialPageRoute(
+                              builder: (context) {
+                                return ServicesForCompany(id: widget.id);
+                              },
+                            ),
 
-
-
-
+                          );
+                        },
+                        child: const Text("My Service"),
+                      ),
+                    ],)
+                ),
                 body: SingleChildScrollView(
                   physics: const BouncingScrollPhysics(),
                   child: Padding(
@@ -74,29 +97,6 @@ class _CompanyScreenState extends State<CompanyScreen> {
                         horizontal: screenWidth * 0.05, vertical: screenHeight * 0.03),
                     child: Column(
                       children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children:  const [
-
-                            BackButton(),
-                            Padding(
-                              padding:EdgeInsets.symmetric(vertical: 10,horizontal: 5),
-                              child: Text(
-                                "Profile",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize:27,
-                                  fontStyle: FontStyle.italic,
-                                  color: Color(0xFF588157),
-                                ),
-                                textAlign: TextAlign.left,
-                              ),
-                            ),
-                            Spacer(),
-
-                          ],
-                        ),
-
                         Padding(
                           padding: EdgeInsets.symmetric(vertical: screenHeight * 0.01),
                           child: Row(
