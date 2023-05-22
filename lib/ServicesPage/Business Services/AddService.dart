@@ -98,6 +98,7 @@ class AddService extends StatelessWidget {
                               name: dropdownValue1.toString(),
                               description: Bdiscription.text.toString()
                           );
+                          BusinessServiceCubit.get(context).getAllService();
                           Navigator.pop(context);
                         }
                       }),

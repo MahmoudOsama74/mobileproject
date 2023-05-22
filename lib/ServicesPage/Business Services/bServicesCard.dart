@@ -5,6 +5,7 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:mobileproject/ServicesPage/Cubit/BusinessServiceStates.dart';
 import 'package:mobileproject/ServicesPage/Cubit/BussinessServiceCubit.dart';
@@ -29,7 +30,31 @@ Widget bServicesCard(BuildContext context,businessService,GlobalKey<ScaffoldStat
 
   var screenHeight = MediaQuery.of(context).size.height;
   var screenWidth = MediaQuery.of(context).size.width;
+  Future _determineUserCurrentPosition() async {
+    LocationPermission locationPermission;
+    bool isLocationServiceEnabled = await Geolocator.isLocationServiceEnabled();
+    //check if user enable service for location permission
+    if(!isLocationServiceEnabled) {
+      print("user don't enable location permission");
+    }
 
+    locationPermission = await Geolocator.checkPermission();
+
+    //check if user denied location and retry requesting for permission
+    if(locationPermission == LocationPermission.denied) {
+      locationPermission = await Geolocator.requestPermission();
+      if(locationPermission == LocationPermission.denied) {
+        print("user denied location permission");
+      }
+    }
+
+    //check if user denied permission forever
+    if(locationPermission == LocationPermission.deniedForever) {
+      print("user denied permission forever");
+    }
+
+    return await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.best);
+  }
   return BlocConsumer<BusinessServiceCubit, BusinessServiceStates>(
     listener: (context, state) {
     },
@@ -89,12 +114,11 @@ Widget bServicesCard(BuildContext context,businessService,GlobalKey<ScaffoldStat
                       backgroundColor: Colors.white,
                       foregroundColor:const Color(0xFF04342A) ,
                       onPressed: ()async{
-                        LatLng? location= await MyMap.getLocation();
-                        if(location?.latitude!=null&&location?.longitude!=null){
-                          }BusinessServiceCubit.get(context).getDistanceCompanyToUser(
-                            lat: location?.latitude??0.0,
-                            lon: location?.longitude??0.0,
-                            service_id: businessService.id
+                        Position currentPosition = await _determineUserCurrentPosition();
+                        BusinessServiceCubit.get(context).getDistanceCompanyToUser(
+                            lat: currentPosition.latitude??0.0,
+                            lon: currentPosition.longitude??0.0,
+                            service_id: businessService.serviceId
                         );
                         /*BusinessServiceCubit.get(context).getDistanceCompanyToUser(
                             lat: 20.2658954,

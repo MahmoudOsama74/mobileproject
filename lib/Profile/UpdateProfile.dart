@@ -73,6 +73,7 @@ class _UpdateScreenState extends State<UpdateScreen> {
           }
           if(state is UserInformationSuccessState){
             CnameController.text=state.userInformationModel.user?.name??"";
+            phoneController.text = state.userInformationModel.user?.contactPersonPhoneNumber??"";
             PnameController.text=state.userInformationModel.user?.contactPersonName??"";
             EmailController.text=state.userInformationModel.user?.email??"";
             companyAddressController.text=state.userInformationModel.user?.companyAddress??"";
@@ -330,13 +331,16 @@ class _UpdateScreenState extends State<UpdateScreen> {
                                   minimumSize: const Size(200, 50),
                                 ),
                                 onPressed: () {
+                                  print(x);
+                                  print(ZZ);
                                   UpdateProfileCubit.get(context).userUpdate(
                                       name: CnameController.text,
                                       contact_person_name: PnameController.text,
                                       contact_person_phone_number: phoneController.text,
                                       company_address: EmailController.text,
-                                      company_size: dropdownValue1, photo: imagepath??" ",
-                                      company_industry: x
+                                      company_size: dropdownValue1,
+                                      photo: imagepath??" ",
+                                      company_industry: x!="" ?x:ZZ
                                   );
 
                                 },
