@@ -76,9 +76,10 @@ Widget bServicesCard(BuildContext context,businessService,GlobalKey<ScaffoldStat
                   children: [
                     InkWell(
                       onTap:(){
+                        print("iddddddddd:${businessService.companyId}");
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) =>CompanyScreen(id: businessService.companyId,),
+                          MaterialPageRoute(builder: (context) =>CompanyScreen(id: businessService.companyId),
                         ),
                         );
                       },

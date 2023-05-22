@@ -43,9 +43,10 @@ Widget CopmanyCard(BuildContext context,businessService,GlobalKey<ScaffoldState>
                   children: [
                     InkWell(
                       onTap:(){
+                        print("idFFFFF: ${businessService.companyId}");
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) =>CompanyScreen(id: businessService.serviceId,),
+                          MaterialPageRoute(builder: (context) =>CompanyScreen(id: businessService.companyId,),
                           ),
                         );
                       },
@@ -84,7 +85,7 @@ Widget CopmanyCard(BuildContext context,businessService,GlobalKey<ScaffoldState>
                       onPressed: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) =>CompanyScreen(id: businessService.serviceId,),
+                          MaterialPageRoute(builder: (context) =>CompanyScreen(id: businessService.companyId,),
                           ),
                         );
                       },

@@ -29,7 +29,7 @@ class Services {
   String? serviceName;
   String? serviceDescription;
   String? companyName;
-  Null? companyPhoto;
+  String? companyPhoto;
   int? companyId;
 
   Services(
