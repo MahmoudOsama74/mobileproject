@@ -41,30 +41,20 @@ class ServicesForCompany extends StatelessWidget {
         },
         builder: (context, state) {
           return Scaffold(
-            key: scaffoldKey,
-            floatingActionButton: FloatingActionButton.small(
-              heroTag: "baseXBtn1",
-              elevation: 20,
-              backgroundColor:Colors.white ,
-              foregroundColor: Colors.white,
-              child:const Icon(
-                Icons.add,
-                color: Color(0xFF04342A),
-                size: 30.0,
-                semanticLabel: 'Text to announce in accessibility modes',
-              ),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return AddService();
-                    },
+            appBar: AppBar(
+                backgroundColor: const Color(0xFFFFFFFF),
+                leading: IconButton(
+                  icon: const Icon(Icons.arrow_back, color: Color(0xFF04342A)),
+                  onPressed: () => Navigator.of(context).pop(),
+                ),
+                title: Row(children:  const [
+                  Text('Services for Company',
+                    style: TextStyle(fontWeight: FontWeight.bold,color:Color(0xFF04342A), ),
                   ),
-                );
-              },
-
+                  Spacer(),
+                ],)
             ),
+            key: scaffoldKey,
             body:Column(
               children: [
                 ConditionalBuilder(

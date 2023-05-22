@@ -26,7 +26,7 @@ class BusinessServiceCubit extends Cubit<BusinessServiceStates> {
   CompanyProfileForServiceModel? companyProfileForServiceModel;
   CreateServiceModel? createServiceModel;
   GetAllService.GetAllServiceModel? getAllServiceModel;
-  ServiceOfCompanyModel? serviceOfCompanyModel;
+  ServicesOfCompanyModel? serviceOfCompanyModel;
   DistanceCompanyToUser? distanceCompanyToUser;
 
   void createService({
@@ -159,7 +159,8 @@ class BusinessServiceCubit extends Cubit<BusinessServiceStates> {
     print(response.body);
     if(response.statusCode==201){
       print("response");
-      serviceOfCompanyModel = ServiceOfCompanyModel.fromJson(json.decode(response.body));
+      serviceOfCompanyModel = ServicesOfCompanyModel.fromJson(json.decode(response.body));
+      print(serviceOfCompanyModel?.services);
       emit(ServiceOfCompanySuccessState(serviceOfCompanyModel!));
     }
     else{

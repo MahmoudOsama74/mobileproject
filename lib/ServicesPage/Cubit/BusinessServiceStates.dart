@@ -94,7 +94,7 @@ class ServiceOfCompanyLoadingState extends BusinessServiceStates {}
 
 class ServiceOfCompanySuccessState extends BusinessServiceStates
 {
-  late ServiceOfCompanyModel serviceOfCompanyModel;
+  late ServicesOfCompanyModel serviceOfCompanyModel;
 
   ServiceOfCompanySuccessState(this.serviceOfCompanyModel);
 }

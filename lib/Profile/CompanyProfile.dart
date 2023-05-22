@@ -83,6 +83,7 @@ class _CompanyScreenState extends State<CompanyScreen> {
                               context,
                             MaterialPageRoute(
                               builder: (context) {
+                                print("id: ${widget.id}");
                                 return ServicesForCompany(id: widget.id);
                               },
                             ),

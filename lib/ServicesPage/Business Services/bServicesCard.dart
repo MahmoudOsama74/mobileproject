@@ -53,7 +53,7 @@ Widget bServicesCard(BuildContext context,businessService,GlobalKey<ScaffoldStat
                       onTap:(){
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) =>CompanyScreen(id: businessService.serviceId,),
+                          MaterialPageRoute(builder: (context) =>CompanyScreen(id: businessService.companyId,),
                         ),
                         );
                       },
@@ -84,6 +84,75 @@ Widget bServicesCard(BuildContext context,businessService,GlobalKey<ScaffoldStat
                       ),
                     ),
                     const Spacer(),
+                    FloatingActionButton.small(
+                      heroTag: "btnDelete$index",
+                      backgroundColor: Colors.white,
+                      foregroundColor:const Color(0xFF04342A) ,
+                      onPressed: ()async{
+                        LatLng? location= await MyMap.getLocation();
+                        if(location?.latitude!=null&&location?.longitude!=null){
+                          }BusinessServiceCubit.get(context).getDistanceCompanyToUser(
+                            lat: location?.latitude??0.0,
+                            lon: location?.longitude??0.0,
+                            service_id: businessService.id
+                        );
+                        /*BusinessServiceCubit.get(context).getDistanceCompanyToUser(
+                            lat: 20.2658954,
+                            lon: 21.4654864,
+                            service_id: businessService.serviceId
+                        );*/
+                        if(BusinessServiceCubit.get(context).distanceCompanyToUser?.distance.toString()!=null) {
+                          scaffoldKey.currentState?.showBottomSheet((context) =>
+                              SizedBox(
+                                height: 170,
+                                child: Form(
+                                  key: _formKey105,
+                                  child:
+                                  Column(
+                                      children: [
+                                        const SizedBox(
+                                          height: 20,
+                                        ),
+                                        const Text(
+                                          "       This is Distance between current position and this\n company position",
+                                          style: TextStyle(fontSize: 15,
+                                              fontWeight: FontWeight.bold,
+                                              color: Color(
+                                                  0xFF04342A)),),
+                                        Padding(
+                                          padding: const EdgeInsets.all(30),
+                                          child: Row(children: [
+                                            FloatingActionButton.extended(
+                                                heroTag: "btnCancel$index",
+                                                backgroundColor: Colors.white,
+                                                foregroundColor: const Color(
+                                                    0xFF026241),
+                                                label: Row(children: [
+                                                  const Icon(Icons
+                                                      .directions_walk_outlined),
+                                                  Text("${BusinessServiceCubit
+                                                      .get(context)
+                                                      .distanceCompanyToUser
+                                                      ?.distance}  Km")
+                                                ],),
+                                                onPressed: () {
+                                                  Navigator.pop(context);
+                                                  //BloodPressureCreatedTestCubit.get(context).changeIconAdd();
+                                                }),
+
+
+                                          ],),
+                                        ),
+
+                                      ]),
+                                ),
+                              ),
+                          );
+                        }
+
+                      },
+                      child: const Icon(Icons.location_on),
+                    ),
                     ChangeNotifierProvider(
                       create: (_) => FavoriteProvider(),
                       child: Consumer<FavoriteProvider>(
