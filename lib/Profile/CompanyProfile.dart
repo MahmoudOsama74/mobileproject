@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -29,7 +31,8 @@ class _CompanyScreenState extends State<CompanyScreen> {
     var companyIndustryController = TextEditingController(text: "");
     var screenHeight = MediaQuery.of(context).size.height;
     var screenWidth = MediaQuery.of(context).size.width;
-    FilePickerResult? result;
+    String?imagepath="/data/user/0/com.example.mobileproject/cache/f87346ef-4e50-4ee0-810c-e9acf8c57726/IMG-20230522-WA0120.jpg";
+
     bool isKeyboardOpened = MediaQuery.of(context).viewInsets.bottom != 0.0;
     return BlocProvider(
       create: (BuildContext context) => BusinessServiceCubit()..getCompanyProfileForService(id: widget.id),
@@ -108,14 +111,19 @@ class _CompanyScreenState extends State<CompanyScreen> {
                                   CircleAvatar(
                                     backgroundColor: defaultTealAccent.withOpacity(0.6),
                                     radius: screenHeight * 0.088,
-                                    child: CircleAvatar(
-                                      backgroundColor: defaultWhite,
-                                      radius: screenHeight * 0.084,
-                                      child: CircleAvatar(
-                                        radius: screenHeight * 0.081,
-                                        backgroundImage: AssetImage( 'assets/images/img.png'),
+                                    child: ClipOval(
+                                      child: (imagepath != null)
+                                          ? Image.file(
+                                        File(imagepath!),
+                                        fit: BoxFit.cover,
+                                        width: double.infinity,
+                                        height: double.infinity,
+                                      )
+                                          : Container(
+                                        color: defaultWhite,
                                       ),
                                     ),
+
                                   ),
 
                                 ],

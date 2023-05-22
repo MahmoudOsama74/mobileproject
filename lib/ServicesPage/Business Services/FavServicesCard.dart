@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:math';
 
 
@@ -10,6 +11,7 @@ import 'package:mobileproject/ServicesPage/model/bServicesModel.dart';
 import '../../Profile/CompanyProfile.dart';
 import 'package:provider/provider.dart';
 
+import '../../shared/styles/colors.dart';
 import '../Cubit/BusinessServiceStates.dart';
 import '../Cubit/BussinessServiceCubit.dart';
 import '../Cubit/FavoriteIcon.dart';
@@ -21,7 +23,9 @@ Widget favServicesCard(BuildContext context,favoriteBusinessService,GlobalKey<Sc
   var _formKey105 = GlobalKey<FormState>();
   final TextEditingController Cname = TextEditingController();
   final TextEditingController Bdiscription = TextEditingController();
-
+  String?imagepath="/data/user/0/com.example.mobileproject/cache/8a1bfe30-9b79-4cf1-ae5f-d68a78ee1bbc/IMG-20230519-WA0035.jpg";
+  var screenHeight = MediaQuery.of(context).size.height;
+  var screenWidth = MediaQuery.of(context).size.width;
 
   return BlocConsumer<BusinessServiceCubit, BusinessServiceStates>(
     listener: (context, state) {
@@ -50,10 +54,22 @@ Widget favServicesCard(BuildContext context,favoriteBusinessService,GlobalKey<Sc
                           ),
                         );
                       },
-                      child: const CircleAvatar(
-                        //favoriteBusinessService.companyPhoto
-                        backgroundImage: AssetImage("assets/images/watchclock.png"),
-                        radius: 20,
+                      child: CircleAvatar(
+                        backgroundColor: defaultTealAccent.withOpacity(0.6),
+                        radius: screenHeight * 0.0388,
+                        child: ClipOval(
+                          child: (imagepath != null)
+                              ? Image.file(
+                            File(imagepath!),
+                            fit: BoxFit.cover,
+                            width: double.infinity,
+                            height: double.infinity,
+                          )
+                              : Container(
+                            color: defaultWhite,
+                          ),
+                        ),
+
                       ),
                     ),
                     const SizedBox(width: 8),

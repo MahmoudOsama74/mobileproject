@@ -92,10 +92,10 @@ class AddService extends StatelessWidget {
 
                       onPressedButton("Submit", (){
                         if (_form15.currentState!.validate()) {
-                          print(BName.text);
+                          print(dropdownValue1);
                           print(Bdiscription.text);
                           BusinessServiceCubit.get(context).createService(
-                              name: BName.text.toString(),
+                              name: dropdownValue1.toString(),
                               description: Bdiscription.text.toString()
                           );
                           Navigator.pop(context);
