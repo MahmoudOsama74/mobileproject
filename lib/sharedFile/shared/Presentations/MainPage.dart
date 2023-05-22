@@ -4,6 +4,7 @@ import 'package:conditional_builder_null_safety/conditional_builder_null_safety.
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../ServicesPage/Business Services/SearchPage.dart';
 import '../cubit/cubit.dart';
 import '../cubit/states.dart';
 
@@ -50,11 +51,35 @@ class _homePageState extends State<homePage> {
           AppCubit cubit = AppCubit.get(context);
           return Scaffold(
             appBar: AppBar(
-              title: Text(cubit.titles[cubit.currentIndex],style: const TextStyle(color:Color(
-                  0xFFF0F3F1) ),),
-              backgroundColor: const Color(0xFF04342A),
+              title:Column(
+                children: [
+                  Row(children: [
+                    Text(cubit.titles[cubit.currentIndex],style: const TextStyle(color:Color(
+                        0xFFF0F3F1) ),),
+                    const Spacer(),
+                    BuildCondition(
+                      condition: cubit.titles[cubit.currentIndex]=="Business Services",
+                      builder: (context) {
+                        return Row(
+                          children: [
+                            IconButton(onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) {
+                                    return SearchCompany();
+                                  },
+                                ),
+                              );
+                            }, icon: const Icon(Icons.search)),
+                          ],
+                        );
+                      },
+                    ),
+                  ],),
+                ],),
+                backgroundColor: Color(0xFF02413C),
             ),
-            drawer: const NavigationDrawer(),
             body: ConditionalBuilder(
               condition: true,
               builder: (context) => cubit.screens[cubit.currentIndex],
