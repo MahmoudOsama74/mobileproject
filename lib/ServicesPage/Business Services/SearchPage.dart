@@ -40,7 +40,7 @@ class _SearchCompanyState extends State<SearchCompany> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (BuildContext context) => BusinessServiceCubit()..getAllService(),
+      create: (BuildContext context) => BusinessServiceCubit(),
       child: BlocConsumer<BusinessServiceCubit, BusinessServiceStates>(
         listener: (context, state) {
           if (state is GetAllServiceSuccessState) {}
@@ -127,6 +127,8 @@ class _SearchCompanyState extends State<SearchCompany> {
                       itemBuilder: (context, index) {
                         final service = BusinessServiceCubit.get(context).getAllServiceModel?.services![index];
                         if ( service?.serviceName == selectedFilter) {
+                          //BusinessServiceCubit.get(context).getCompaniesFilterByServices(name: selectedFilter);
+                          //BusinessServiceCubit.get(context).companiesFilterByServicesModel?.companyProfile?.length;
                           return CopmanyCard(context, service, scaffoldKey, index);
                         } else {
                           return SizedBox(); // Return an empty container if the item doesn't match the selected filter
