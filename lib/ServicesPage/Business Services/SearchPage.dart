@@ -73,6 +73,8 @@ class _SearchCompanyState extends State<SearchCompany> {
               ),
               onPressed: () {
                 print("KKKKKKK");
+                List<LatLng> companyLocationss =BusinessServiceCubit.get(context).companyLocations;
+                print(BusinessServiceCubit.get(context).companyLocations);
                 /*Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -91,7 +93,7 @@ class _SearchCompanyState extends State<SearchCompany> {
                   context,
                   MaterialPageRoute(
                     builder: (context) {
-                      return companiesInMapView(companyLocations:BusinessServiceCubit.get(context).companyLocations,);
+                      return companiesInMapView(companyLocations:companyLocationss,);
                     },
                   ),
                 );
