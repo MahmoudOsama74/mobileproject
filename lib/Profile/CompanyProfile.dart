@@ -31,8 +31,7 @@ class _CompanyScreenState extends State<CompanyScreen> {
     var companyIndustryController = TextEditingController(text: "");
     var screenHeight = MediaQuery.of(context).size.height;
     var screenWidth = MediaQuery.of(context).size.width;
-    String?imagepath="/data/user/0/com.example.mobileproject/cache/f87346ef-4e50-4ee0-810c-e9acf8c57726/IMG-20230522-WA0120.jpg";
-
+    String? imagepath="";
     bool isKeyboardOpened = MediaQuery.of(context).viewInsets.bottom != 0.0;
     return BlocProvider(
       create: (BuildContext context) => BusinessServiceCubit()..getCompanyProfileForService(id: widget.id),
@@ -46,6 +45,7 @@ class _CompanyScreenState extends State<CompanyScreen> {
             companyAddressController = TextEditingController(text:BusinessServiceCubit.get(context).companyProfileForServiceModel?.companyProfile![0].companyAddress);
             companySizeController = TextEditingController(text: BusinessServiceCubit.get(context).companyProfileForServiceModel?.companyProfile![0].companySize);
             companyIndustryController = TextEditingController(text: BusinessServiceCubit.get(context).companyProfileForServiceModel?.companyProfile![0].companyIndustry);
+            imagepath = BusinessServiceCubit.get(context).companyProfileForServiceModel?.companyProfile![0].photo;
           }
           if (state is GetAllServiceSuccessState){
           }

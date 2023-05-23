@@ -6,7 +6,7 @@ import '../model/CompaniesFilterByServicesModel.dart';
 import '../model/CompanyProfileForServiceModel.dart';
 import '../model/DistanceCompanyToUser.dart';
 import '../model/GetAllServiceModel.dart';
-import '../model/ServiceOfCompanyMpdel.dart';
+import '../model/ServiceOfCompanyModel.dart';
 import '../model/allCompanyModel.dart';
 
 abstract class  BusinessServiceStates{}

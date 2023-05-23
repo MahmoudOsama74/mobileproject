@@ -21,7 +21,7 @@ Widget CopmanyCard(BuildContext context,businessService,GlobalKey<ScaffoldState>
   var _formKey105 = GlobalKey<FormState>();
   var screenHeight = MediaQuery.of(context).size.height;
   var screenWidth = MediaQuery.of(context).size.width;
-  String?imagepath="/data/user/0/com.example.mobileproject/cache/f87346ef-4e50-4ee0-810c-e9acf8c57726/IMG-20230522-WA0120.jpg";
+  String? imagepath=businessService.companyPhoto;
   return BlocConsumer<BusinessServiceCubit, BusinessServiceStates>(
     listener: (context, state) {
     },

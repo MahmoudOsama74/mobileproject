@@ -74,9 +74,22 @@ class ResetPasswordState extends State<ResetPassword> {
                               ),
                             ),
                           ),
-                          inputFieldTest(_oldPassword,"Old Password",TextInputType.text,null),
-                          inputFieldTest(_newPassword,"New Password",TextInputType.text,null),
-                          inputFieldTest(_confirmPassword,"confirm Password",TextInputType.text,null),
+                          inputFieldTestreset(_oldPassword,"Old Password",TextInputType.text,null),
+                          inputFieldTestreset(_newPassword,"New Password",TextInputType.text,(val) {
+                            if (val!.isEmpty) return 'Empty';
+
+                            if (val.length >= 8) {} else {
+                              return ("Invalid Password");
+                            }
+                            return null;
+                          }),
+                          inputFieldTestreset(_confirmPassword,"confirm Password",TextInputType.text,(val) {
+                            if (val!.isEmpty) return 'Empty';
+                            if (val != _confirmPassword.text) {
+                              return 'Not Match Password';
+                            }
+                            return null;
+                          }),
 
 
                           const SizedBox(height: 10 / 2),

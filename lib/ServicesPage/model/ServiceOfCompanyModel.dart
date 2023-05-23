@@ -6,9 +6,9 @@ class ServicesOfCompanyModel {
 
   ServicesOfCompanyModel.fromJson(Map<String, dynamic> json) {
     message = json['message'];
-    if (json['services'] != null) {
+    if (json['Services'] != null) {
       services = <Services>[];
-      json['services'].forEach((v) {
+      json['Services'].forEach((v) {
         services!.add(new Services.fromJson(v));
       });
     }
@@ -18,7 +18,7 @@ class ServicesOfCompanyModel {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['message'] = this.message;
     if (this.services != null) {
-      data['services'] = this.services!.map((v) => v.toJson()).toList();
+      data['Services'] = this.services!.map((v) => v.toJson()).toList();
     }
     return data;
   }

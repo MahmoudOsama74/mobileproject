@@ -229,7 +229,7 @@ class _UpdateScreenState extends State<UpdateScreen> {
                             inputFieldTest(
                               companyAddressController,
                               "Company Address",
-                              TextInputType.none,
+                              TextInputType.text,
                                   (val) {
                                 if (val!.isEmpty) return 'Empty';
                                 return null;
@@ -337,7 +337,7 @@ class _UpdateScreenState extends State<UpdateScreen> {
                                       name: CnameController.text,
                                       contact_person_name: PnameController.text,
                                       contact_person_phone_number: phoneController.text,
-                                      company_address: EmailController.text,
+                                      company_address: companyAddressController.text,
                                       company_size: dropdownValue1,
                                       photo: imagepath??" ",
                                       company_industry: x!="" ?x:ZZ

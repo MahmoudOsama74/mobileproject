@@ -15,7 +15,7 @@ import '../model/CompaniesFilterByServicesModel.dart';
 import '../model/CompanyProfileForServiceModel.dart';
 import '../model/CreateServiceModel.dart';
 import '../model/GetAllServiceModel.dart' as GetAllService;
-import '../model/ServiceOfCompanyMpdel.dart';
+import '../model/ServiceOfCompanyModel.dart';
 import '../model/allCompanyModel.dart';
 
 class BusinessServiceCubit extends Cubit<BusinessServiceStates> {

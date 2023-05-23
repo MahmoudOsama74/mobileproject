@@ -20,6 +20,23 @@ Widget inputFieldTest(TextEditingController fieldController,String fieldName,Tex
     ),
   );
 }
+Widget inputFieldTestreset(TextEditingController fieldController,String fieldName,TextInputType type,validationFunction){
+  return Padding(
+    padding:
+    const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+    child: TextFormField(
+      controller: fieldController,
+      obscureText: true,
+      cursorColor: kPrimaryColor,
+      keyboardType: type,
+      decoration:  InputDecoration(
+        labelText: "$fieldName  \n",
+        labelStyle: const TextStyle(fontSize: 20, color: Colors.black),
+      ),
+      validator: validationFunction,
+    ),
+  );
+}
 Widget inputFieldTestRead(TextEditingController fieldController,String fieldName,TextInputType type,validationFunction){
   return Padding(
     padding:
