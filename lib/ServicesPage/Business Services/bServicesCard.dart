@@ -26,7 +26,7 @@ Widget bServicesCard(BuildContext context,businessService,GlobalKey<ScaffoldStat
   var _formKey105 = GlobalKey<FormState>();
   final TextEditingController Cname = TextEditingController();
   final TextEditingController Bdiscription = TextEditingController();
-  String? imagepath="/data/user/0/com.example.mobileproject/cache/b6400c46-9b50-4ba2-aba6-dd22c988cbaf/IMG-20230520-WA0033.jpg";
+  String? imagepath=businessService.companyPhoto;
 
   var screenHeight = MediaQuery.of(context).size.height;
   var screenWidth = MediaQuery.of(context).size.width;

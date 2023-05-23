@@ -39,13 +39,13 @@ class _CompanyScreenState extends State<CompanyScreen> {
       child: BlocConsumer<BusinessServiceCubit,BusinessServiceStates>(
         listener: (context, state) {
           if(state is CompanyProfileForServiceSuccessState){
-            CnameController = TextEditingController(text: BusinessServiceCubit.get(context).companyProfileForServiceModel?.companyProfile?.name);
-            PnameController = TextEditingController(text: BusinessServiceCubit.get(context).companyProfileForServiceModel?.companyProfile?.contactPersonName);
-            phoneController = TextEditingController(text: BusinessServiceCubit.get(context).companyProfileForServiceModel?.companyProfile?.contactPersonPhoneNumber);
-            EmailController = TextEditingController(text: BusinessServiceCubit.get(context).companyProfileForServiceModel?.companyProfile?.email);
-            companyAddressController = TextEditingController(text:BusinessServiceCubit.get(context).companyProfileForServiceModel?.companyProfile?.companyAddress);
-            companySizeController = TextEditingController(text: BusinessServiceCubit.get(context).companyProfileForServiceModel?.companyProfile?.companySize);
-            companyIndustryController = TextEditingController(text: BusinessServiceCubit.get(context).companyProfileForServiceModel?.companyProfile?.companyIndustry);
+            CnameController = TextEditingController(text: BusinessServiceCubit.get(context).companyProfileForServiceModel?.companyProfile![0].name);
+            PnameController = TextEditingController(text: BusinessServiceCubit.get(context).companyProfileForServiceModel?.companyProfile![0].contactPersonName);
+            phoneController = TextEditingController(text: BusinessServiceCubit.get(context).companyProfileForServiceModel?.companyProfile![0].contactPersonPhoneNumber);
+            EmailController = TextEditingController(text: BusinessServiceCubit.get(context).companyProfileForServiceModel?.companyProfile![0].email);
+            companyAddressController = TextEditingController(text:BusinessServiceCubit.get(context).companyProfileForServiceModel?.companyProfile![0].companyAddress);
+            companySizeController = TextEditingController(text: BusinessServiceCubit.get(context).companyProfileForServiceModel?.companyProfile![0].companySize);
+            companyIndustryController = TextEditingController(text: BusinessServiceCubit.get(context).companyProfileForServiceModel?.companyProfile![0].companyIndustry);
           }
           if (state is GetAllServiceSuccessState){
           }

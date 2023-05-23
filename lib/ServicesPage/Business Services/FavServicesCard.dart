@@ -23,8 +23,8 @@ Widget favServicesCard(BuildContext context,favoriteBusinessService,GlobalKey<Sc
   var _formKey105 = GlobalKey<FormState>();
   final TextEditingController Cname = TextEditingController();
   final TextEditingController Bdiscription = TextEditingController();
-  String?imagepath="/data/user/0/com.example.mobileproject/cache/8a1bfe30-9b79-4cf1-ae5f-d68a78ee1bbc/IMG-20230519-WA0035.jpg";
-  var screenHeight = MediaQuery.of(context).size.height;
+  String? imagepath=favoriteBusinessService.companyPhoto;
+ var screenHeight = MediaQuery.of(context).size.height;
   var screenWidth = MediaQuery.of(context).size.width;
 
   return BlocConsumer<BusinessServiceCubit, BusinessServiceStates>(

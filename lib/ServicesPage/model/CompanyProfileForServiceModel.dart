@@ -1,21 +1,25 @@
 class CompanyProfileForServiceModel {
   String? message;
-  CompanyProfile? companyProfile;
+  List<CompanyProfile>? companyProfile;
 
   CompanyProfileForServiceModel({this.message, this.companyProfile});
 
   CompanyProfileForServiceModel.fromJson(Map<String, dynamic> json) {
     message = json['message'];
-    companyProfile = json['Company Profile'] != null
-        ? new CompanyProfile.fromJson(json['Company Profile'])
-        : null;
+    if (json['Company Profile'] != null) {
+      companyProfile = <CompanyProfile>[];
+      json['Company Profile'].forEach((v) {
+        companyProfile!.add(new CompanyProfile.fromJson(v));
+      });
+    }
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['message'] = this.message;
     if (this.companyProfile != null) {
-      data['Company Profile'] = this.companyProfile!.toJson();
+      data['Company Profile'] =
+          this.companyProfile!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -25,7 +29,7 @@ class CompanyProfile {
   int? id;
   String? name;
   String? email;
-  String? emailVerifiedAt;
+  Null? emailVerifiedAt;
   String? contactPersonName;
   String? contactPersonPhoneNumber;
   String? companyAddress;
@@ -35,6 +39,7 @@ class CompanyProfile {
   double? lat;
   String? createdAt;
   String? updatedAt;
+  String? photo;
 
   CompanyProfile(
       {this.id,
@@ -49,7 +54,8 @@ class CompanyProfile {
         this.lang,
         this.lat,
         this.createdAt,
-        this.updatedAt});
+        this.updatedAt,
+        this.photo});
 
   CompanyProfile.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -65,6 +71,7 @@ class CompanyProfile {
     lat = json['lat'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
+    photo = json['photo'];
   }
 
   Map<String, dynamic> toJson() {
@@ -82,6 +89,7 @@ class CompanyProfile {
     data['lat'] = this.lat;
     data['created_at'] = this.createdAt;
     data['updated_at'] = this.updatedAt;
+    data['photo'] = this.photo;
     return data;
   }
 }
