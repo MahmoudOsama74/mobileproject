@@ -64,9 +64,6 @@ class companiesInMapView extends StatelessWidget {
           ],)
       ),
       body: CompanyMapView(companyLocations: companyLocations),
-    ); /*MaterialApp(
-      title: 'Company Map',
-      home: ,
-    );*/
+    );
   }
 }

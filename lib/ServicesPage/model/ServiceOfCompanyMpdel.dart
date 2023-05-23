@@ -6,9 +6,9 @@ class ServicesOfCompanyModel {
 
   ServicesOfCompanyModel.fromJson(Map<String, dynamic> json) {
     message = json['message'];
-    if (json['Services'] != null) {
+    if (json['services'] != null) {
       services = <Services>[];
-      json['Services'].forEach((v) {
+      json['services'].forEach((v) {
         services!.add(new Services.fromJson(v));
       });
     }
@@ -18,7 +18,7 @@ class ServicesOfCompanyModel {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['message'] = this.message;
     if (this.services != null) {
-      data['Services'] = this.services!.map((v) => v.toJson()).toList();
+      data['services'] = this.services!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -31,6 +31,8 @@ class Services {
   String? companyName;
   String? companyPhoto;
   int? companyId;
+  double? companyLat;
+  double? companyLong;
 
   Services(
       {this.serviceId,
@@ -38,7 +40,9 @@ class Services {
         this.serviceDescription,
         this.companyName,
         this.companyPhoto,
-        this.companyId});
+        this.companyId,
+        this.companyLat,
+        this.companyLong});
 
   Services.fromJson(Map<String, dynamic> json) {
     serviceId = json['service_id'];
@@ -47,6 +51,8 @@ class Services {
     companyName = json['Company_name'];
     companyPhoto = json['Company_photo'];
     companyId = json['Company_id'];
+    companyLat = json['Company_lat'];
+    companyLong = json['Company_long'];
   }
 
   Map<String, dynamic> toJson() {
@@ -57,6 +63,8 @@ class Services {
     data['Company_name'] = this.companyName;
     data['Company_photo'] = this.companyPhoto;
     data['Company_id'] = this.companyId;
+    data['Company_lat'] = this.companyLat;
+    data['Company_long'] = this.companyLong;
     return data;
   }
 }

@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import '../../Login/components/cbuilder.dart';
 import '../../shared/components/EmptyWidget.dart';
 import '../../shared/components/toast.dart';
@@ -11,6 +12,7 @@ import '../Cubit/BussinessServiceCubit.dart';
 import '../model/bServicesModel.dart';
 import 'AddService.dart';
 import 'CompanyCard.dart';
+import 'MapView.dart';
 import 'bServicesCard.dart';
 
 class SearchCompany extends StatefulWidget {
@@ -40,7 +42,7 @@ class _SearchCompanyState extends State<SearchCompany> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (BuildContext context) => BusinessServiceCubit(),
+      create: (context) => BusinessServiceCubit()..getAllService(),
       child: BlocConsumer<BusinessServiceCubit, BusinessServiceStates>(
         listener: (context, state) {
           if (state is GetAllServiceSuccessState) {}
@@ -70,11 +72,26 @@ class _SearchCompanyState extends State<SearchCompany> {
                 semanticLabel: 'Text to announce in accessibility modes',
               ),
               onPressed: () {
+                print("KKKKKKK");
+                /*Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context)=> MultiBlocProvider(
+                      providers: [
+                        BlocProvider<BusinessServiceCubit>.value(
+                          value: BusinessServiceCubit(),
+                        ),
+                      ],
+                      child: companiesInMapView(companyLocations:BusinessServiceCubit.get(context).companyLocations,),
+                    ),
+                  ),
+                );*/
+
                 Navigator.push(
                   context,
                   MaterialPageRoute(
                     builder: (context) {
-                      return AddService();
+                      return companiesInMapView(companyLocations:BusinessServiceCubit.get(context).companyLocations,);
                     },
                   ),
                 );
@@ -127,8 +144,9 @@ class _SearchCompanyState extends State<SearchCompany> {
                       itemBuilder: (context, index) {
                         final service = BusinessServiceCubit.get(context).getAllServiceModel?.services![index];
                         if ( service?.serviceName == selectedFilter) {
-                          //BusinessServiceCubit.get(context).getCompaniesFilterByServices(name: selectedFilter);
-                          //BusinessServiceCubit.get(context).companiesFilterByServicesModel?.companyProfile?.length;
+                          late LatLng _center = LatLng(service?.companyLat??30.7749,service?.companyLong??31.291431);
+                          print(_center);
+                          BusinessServiceCubit.get(context).companyLocations.add(_center);
                           return CopmanyCard(context, service, scaffoldKey, index);
                         } else {
                           return SizedBox(); // Return an empty container if the item doesn't match the selected filter

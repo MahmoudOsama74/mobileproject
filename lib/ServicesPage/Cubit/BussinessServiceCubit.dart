@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:bloc/bloc.dart';
@@ -30,6 +31,7 @@ class BusinessServiceCubit extends Cubit<BusinessServiceStates> {
   ServicesOfCompanyModel? serviceOfCompanyModel;
   DistanceCompanyToUser? distanceCompanyToUser;
   CompaniesFilterByServicesModel? companiesFilterByServicesModel;
+  List<LatLng> companyLocations = [];
 
   void createService({
    required String name,
