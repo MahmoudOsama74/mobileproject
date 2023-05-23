@@ -2,6 +2,7 @@
 import 'package:mobileproject/ServicesPage/model/CreateServiceModel.dart';
 
 import '../model/AddServiceToFavoritModel.dart';
+import '../model/CompaniesFilterByServicesModel.dart';
 import '../model/CompanyProfileForServiceModel.dart';
 import '../model/DistanceCompanyToUser.dart';
 import '../model/GetAllServiceModel.dart';
@@ -86,6 +87,26 @@ class CompanyProfileForServiceErrorState extends BusinessServiceStates
 
   CompanyProfileForServiceErrorState(this.error);
 }
+
+
+class CompaniesFilterByServicesLoadingState extends BusinessServiceStates {}
+
+class CompaniesFilterByServicesSuccessState extends BusinessServiceStates
+{
+  late CompaniesFilterByServicesModel companiesFilterByServicesModel;
+
+  CompaniesFilterByServicesSuccessState(this.companiesFilterByServicesModel);
+}
+
+class CompaniesFilterByServicesErrorState extends BusinessServiceStates
+{
+  final String error;
+
+  CompaniesFilterByServicesErrorState(this.error);
+}
+
+
+
 
 
 

@@ -10,6 +10,7 @@ import 'package:mobileproject/ServicesPage/model/DistanceCompanyToUser.dart';
 
 import '../../Login/components/constants.dart';
 import '../model/AddServiceToFavoritModel.dart';
+import '../model/CompaniesFilterByServicesModel.dart';
 import '../model/CompanyProfileForServiceModel.dart';
 import '../model/CreateServiceModel.dart';
 import '../model/GetAllServiceModel.dart' as GetAllService;
@@ -28,6 +29,7 @@ class BusinessServiceCubit extends Cubit<BusinessServiceStates> {
   GetAllService.GetAllServiceModel? getAllServiceModel;
   ServicesOfCompanyModel? serviceOfCompanyModel;
   DistanceCompanyToUser? distanceCompanyToUser;
+  CompaniesFilterByServicesModel? companiesFilterByServicesModel;
 
   void createService({
    required String name,
@@ -141,6 +143,34 @@ class BusinessServiceCubit extends Cubit<BusinessServiceStates> {
       emit(GetAllServiceErrorState(response.body.toString()));
     }
   }
+
+  void getCompaniesFilterByServices({
+    required String name,
+    })async{
+    emit(CompaniesFilterByServicesLoadingState());
+    final data ={
+      "name":name
+    };
+    final uri =
+    Uri.https('mobileenterpriseapplication-production.up.railway.app', '/api/Auth/getAllCompaniesProvideService',data);
+    final response = await http.get(uri, headers: {
+      HttpHeaders.contentTypeHeader: 'application/json',
+      HttpHeaders.authorizationHeader:token != null?'Bearer $token':'Bearer',
+    });
+    print(response.statusCode);
+    print(response.body);
+    if(response.statusCode==201){
+      print("response");
+      companiesFilterByServicesModel = CompaniesFilterByServicesModel.fromJson(json.decode(response.body));
+      emit(CompaniesFilterByServicesSuccessState(companiesFilterByServicesModel!));
+    }
+    else{
+      emit(CompanyProfileForServiceErrorState(response.body.toString()));
+    }
+  }
+
+
+
   void getAllServiceOfCompany({
     required int id,
   })async{

@@ -64,7 +64,7 @@ class _SearchCompanyState extends State<SearchCompany> {
               backgroundColor: Colors.white,
               foregroundColor: Colors.white,
               child: const Icon(
-                Icons.add,
+                Icons.location_on,
                 color: Color(0xFF04342A),
                 size: 30.0,
                 semanticLabel: 'Text to announce in accessibility modes',
